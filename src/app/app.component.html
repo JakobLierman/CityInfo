@@ -24,6 +24,10 @@
 
 <div class="container mt-3 mb-3">
   <router-outlet></router-outlet>
+
+  <app-bericht *ngFor='let localBericht of berichten' [bericht]='localBericht'></app-bericht>
+
+
 </div>
 
 <footer class="footer">
