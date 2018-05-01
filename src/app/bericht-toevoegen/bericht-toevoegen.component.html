@@ -1,3 +1,19 @@
-<p>
-  bericht-toevoegen works!
-</p>
+<form class="col-xl-6 col-sm-12">
+  <h2>Bericht toevoegen</h2>
+  <div class="form-group">
+    <input class="form-control" id="titel" placeholder="Titel" #berichtTitel>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" id="bericht" rows="5" placeholder="Voer hier je bericht in." #berichtTekst></textarea>
+  </div>
+  <div class="form-group">
+    <label for="categorie">Categorie</label>
+    <select class="form-control" id="categorie" #categorie>
+      <option>Algemeen</option>
+      <option>Categorie 1</option>
+      <option>Categorie 2</option>
+      <option>Categorie 3</option>
+    </select>
+  </div>
+  <button (click)="berichtToevoegen(berichtTitel, berichtTekst)" type="submit" class="btn btn-primary">Bericht plaatsen</button>
+</form>
