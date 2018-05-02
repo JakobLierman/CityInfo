@@ -6,13 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+// mongoose
+mongoose.connect('mongodb://localhost/cityinfodb');
+require('./models/Bericht');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
-// mongoose
-mongoose.connect('mongodb://localhost/cityinfodb')
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
