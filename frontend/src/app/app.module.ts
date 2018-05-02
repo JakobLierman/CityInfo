@@ -5,14 +5,14 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
-import { OverzichtComponent } from "./overzicht/overzicht.component";
-import { BerichtComponent } from "./bericht/bericht.component";
-import { BerichtToevoegenComponent } from "./bericht-toevoegen/bericht-toevoegen.component";
+import { BerichtComponent } from "./bericht/bericht/bericht.component";
+import { BerichtToevoegenComponent } from "./bericht/bericht-toevoegen/bericht-toevoegen.component";
 import { HomeComponent } from "./home/home.component";
 import { PaginaNietGevondenComponent } from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
+import { BerichtLijstComponent } from './bericht/bericht-lijst/bericht-lijst.component';
 
 const appRoutes: Routes = [
-  { path: "overzicht", component: OverzichtComponent },
+  { path: "berichten", component: BerichtLijstComponent },
   { path: "bericht-toevoegen", component: BerichtToevoegenComponent },
   { path: "home", component: HomeComponent },
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -22,11 +22,11 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    OverzichtComponent,
     BerichtComponent,
     BerichtToevoegenComponent,
     HomeComponent,
-    PaginaNietGevondenComponent
+    PaginaNietGevondenComponent,
+    BerichtLijstComponent
   ],
   imports: [
     BrowserModule,

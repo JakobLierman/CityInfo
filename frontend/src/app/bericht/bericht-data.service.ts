@@ -1,4 +1,4 @@
-import { Bericht } from './bericht/bericht.model';
+import { Bericht } from './bericht.model';
 import { Injectable } from '@angular/core';
 
 @Injectable()
