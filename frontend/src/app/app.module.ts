@@ -10,6 +10,8 @@ import { BerichtToevoegenComponent } from "./bericht/bericht-toevoegen/bericht-t
 import { HomeComponent } from "./home/home.component";
 import { PaginaNietGevondenComponent } from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
 import { BerichtLijstComponent } from './bericht/bericht-lijst/bericht-lijst.component';
+import { BerichtDetailComponent } from './bericht/bericht-detail/bericht-detail.component';
+import { ReactieComponent } from './bericht/reactie/reactie.component';
 
 const appRoutes: Routes = [
   { path: "berichten", component: BerichtLijstComponent },
@@ -26,7 +28,9 @@ const appRoutes: Routes = [
     BerichtToevoegenComponent,
     HomeComponent,
     PaginaNietGevondenComponent,
-    BerichtLijstComponent
+    BerichtLijstComponent,
+    BerichtDetailComponent,
+    ReactieComponent
   ],
   imports: [
     BrowserModule,

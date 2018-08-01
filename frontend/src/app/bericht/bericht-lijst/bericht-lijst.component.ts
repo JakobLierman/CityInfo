@@ -1,4 +1,4 @@
-import { BerichtDataService } from './../bericht-data.service';
+import { BerichtDataService } from '../bericht-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
