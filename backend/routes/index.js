@@ -49,4 +49,18 @@ router.post('/API/reacties', function(req, res, next) {
   });
 });
 
+/* RESET DATABASE */
+router.post('/API/reset_db', (req, res, next) => {
+  Bericht.find({}, (err, berichten) => {
+    berichten.forEach(bericht => bericht.remove());
+  });
+  Reactie.find({}, (err, reacties) => {
+    reacties.forEach(reactie => reactie.remove())
+  });
+  /* User.find({}, (err, users) => {
+      users.forEach(user=> user.remove());
+  }); */
+  res.status(204).end();
+});
+
 module.exports = router;
