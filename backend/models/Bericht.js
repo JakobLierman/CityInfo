@@ -2,8 +2,15 @@ var mongoose = require('mongoose');
 
 var BerichtSchema = new mongoose.Schema({
     titel: String,
-    bericht: String,
+    boodschap: String,
     categorie: String,
-    dateAdded: Date,
+    user: String, // Should be user
+    dateAdded: { type: Date, default: Date.now },
+    reacties: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Reactie'
+        }
+    ]
 });
 mongoose.model('Bericht', BerichtSchema);
