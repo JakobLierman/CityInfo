@@ -9,17 +9,42 @@ router.get('/', function(req, res, next) {
   res.send('server works');
 });
 
+/* GET berichten */
 router.get('/API/berichten/', function(req, res, next) {
-  Bericht.find(function(err, berichten){
-    if (err) { return next(err); }
+  Bericht.find(function(err, berichten) {
+    if (err) {
+      return next(err);
+    }
     res.json(berichten);
   });
 });
 
-router.post('/API/berichten/', function (req, res, next) {
+/* POST bericht */
+router.post('/API/berichten/', function(req, res, next) {
   let bericht = new Bericht(req.body);
   bericht.save(function(err, rec) {
-    if (err){ return next(err); }
+    if (err) {
+      return next(err);
+    }
+    res.json(rec);
+  });
+});
+
+/* GET reacties van bericht */
+router.get('/API/reacties', function(req, res, next) {
+  Reactie.find(function(err, reacties) {
+    if (err) {
+      return next(err);
+    }
+    res.json(reacties);
+  });
+});
+
+/* POST reactie op bericht */
+router.post('/API/reacties', function(req, res, next) {
+  let reactie = new Reactie(req.body);
+  reactie.save(function(err, rec) {
+    if (err) { return next(err); }
     res.json(rec);
   });
 });

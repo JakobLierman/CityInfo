@@ -6,11 +6,12 @@ var BerichtSchema = new mongoose.Schema({
     categorie: String,
     user: String, // Should be user
     dateAdded: { type: Date, default: Date.now },
-    reacties: [
+    /* reacties: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Reactie'
         }
-    ]
+    ] */
+    reacties: [String]
 });
 mongoose.model('Bericht', BerichtSchema);
