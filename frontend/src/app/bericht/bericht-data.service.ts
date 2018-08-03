@@ -6,30 +6,31 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BerichtDataService {
-  private readonly _appUrl = '/API/berichten/';
-  private _berichten = new Array<Bericht>();
+  private readonly _appUrl = '/API';
 
   constructor(private http: HttpClient) {}
 
   get berichten(): Observable<Bericht[]> {
     return this.http
-      .get(this._appUrl)
-      .pipe(
-        map((list: any[]): Bericht[] =>
-          list.map(
-            item =>
-              new Bericht(
-                item.titel,
-                item.bericht,
-                item.categorie,
-                item.dateAdded
-              )
-          )
-        )
-      );
+      .get(`${this._appUrl}/berichten/`)
+      .pipe(map((list: any[]): Bericht[] => list.map(Bericht.fromJSON)));
   }
 
-  berichtToevoegen(bericht) {
-    this._berichten.push(bericht);
+  berichtToevoegen(bericht: Bericht): Observable<Bericht> {
+    return this.http
+    .post(`${this._appUrl}/berichten/`, bericht)
+    .pipe(map(Bericht.fromJSON));
+  }
+
+  verwijderBericht(bericht: Bericht): Observable<Bericht> {
+    return this.http
+    .delete(`${this._appUrl}/bericht/${bericht.id}`)
+    .pipe(map(Bericht.fromJSON));
+  }
+
+  getBerichtById(id: string): Observable<Bericht> {
+    return this.http
+      .get(`${this._appUrl}/bericht/${id}`)
+      .pipe(map(Bericht.fromJSON));
   }
 }

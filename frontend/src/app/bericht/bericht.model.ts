@@ -40,6 +40,30 @@ export class Bericht {
     this._dateAdded = dateAdded ? dateAdded : new Date();
   }
 
+  static fromJSON(json: any): Bericht {
+    const rec = new Bericht(
+      json.titel,
+      json.boodschap,
+      json.categorie,
+      json.user,
+      json.created
+    );
+    rec._id = json._id;
+    return rec;
+  }
+
+  toJSON() {
+    return {
+      _id: this._id,
+      titel: this._titel,
+      boodschap: this._boodschap,
+      categorie: this._categorie,
+      user: this._user,
+      created: this._dateAdded,
+      reacties: this._reacties.map(rea => rea.toJSON())
+    };
+  }
+
   get id(): number {
       return this._id;
   }

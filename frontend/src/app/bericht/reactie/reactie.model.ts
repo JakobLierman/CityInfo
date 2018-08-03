@@ -14,6 +14,16 @@ export class Reactie {
     this._dateAdded = dateAdded ? dateAdded : new Date();
   }
 
+  toJSON() {
+    return {
+      _id: this._id,
+      bericht: this._bericht,
+      boodschap: this._boodschap,
+      user: this._user,
+      created: this._dateAdded
+    };
+  }
+
   get id(): number {
       return this._id;
   }
