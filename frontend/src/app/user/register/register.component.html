@@ -1,3 +1,64 @@
-<p>
-  register works!
-</p>
+<h2>Registreren</h2>
+
+<div *ngIf='errorMsg' class="alert alert-danger">{{errorMsg}}</div>
+
+<form [formGroup]='user' (ngSubmit)='onSubmit()' class="col-md-8">
+  <div class="form-row">
+    <div class="col">
+      <div class="form-group">
+        <label for="firstname">Voornaam</label>
+        <input type="text" class="form-control" id="firstname" formControlName='firstname' placeholder="Jan" required>
+        <!-- Check ??? -->
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="lastname">Familienaam</label>
+        <input type="text" class="form-control" id="lastname" formControlName='lastname' placeholder="Janssen" required>
+        <!-- Check ??? -->
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="username">Gebruikersnaam:</label>
+    <input type="text" class="form-control" id="username" formControlName='username' placeholder="CityNinja9000" required>
+    <div class="alert alert-danger alert-dismissable fade show" *ngIf='user.get("username").errors?.userAlreadyExists && user.get("username").touched'>
+      <strong>Oh nee!</strong> Gebruikersnaam is al bezet.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">E-mail:</label>
+    <input type="email" class="form-control" id="email" formControlName='email' placeholder="naam@voorbeeld.com" required>
+    <!-- Check voor geldig email -->
+  </div>
+  <div formGroupName='passwordGroup'>
+    <div class="form-group">
+      <label for="password">Wachtwoord:</label>
+      <input type="password" class="form-control" id="password" formControlName='password' data-test="password" placeholder="Kies een wachtwoord"
+        required>
+      <small id="passwordHelpBlock" class="form-text text-muted">Wachtwoord moet minstens X karakters lang zijn.</small>
+      <!-- Regels voor wachtwoord aanpassen -->
+      <!-- Check voor geldig wachtwoord -->
+    </div>
+    <div class="form-group">
+      <label for="confirmpassword">Herhaal wachtwoord:</label>
+      <input type="password" class="form-control" id="confirmpassword" formControlName='confirmPassword' data-test="confirmPassword"
+        placeholder="Herhaal wachtwoord" required>
+      <!-- Check indien wachtwoorden overeen komen -->
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="regio">Regio:</label>
+    <select id="regio" class="form-control" required>
+      <!-- Opties dynamisch laten verschijnen -->
+      <option value="gent">Gent</option>
+      <option value="brussel">Brussel</option>
+      <option value="antwerpen">Antwerpen</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]='!user.valid' class="btn btn-primary">Bevestig</button>
+  <!-- Button enkel beschikbaar als alle velden ingevuld zijn -->
+</form>
