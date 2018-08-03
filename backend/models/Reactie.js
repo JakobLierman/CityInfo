@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var ReactieSchema = new mongoose.Schema({
+let ReactieSchema = new mongoose.Schema({
     bericht: String, // Should be bericht
     boodschap: String,
     user: String, // Should be user

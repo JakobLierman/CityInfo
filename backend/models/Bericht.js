@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
 let BerichtSchema = new mongoose.Schema({
   titel: String,
@@ -16,4 +16,5 @@ let BerichtSchema = new mongoose.Schema({
     }
   ]
 });
+
 mongoose.model('Bericht', BerichtSchema);

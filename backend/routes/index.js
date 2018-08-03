@@ -3,6 +3,8 @@ var router = express.Router();
 let mongoose = require('mongoose');
 let Bericht = mongoose.model('Bericht');
 let Reactie = mongoose.model('Reactie');
+let Categorie = mongoose.model('Categorie');
+let Regio = mongoose.model('Regio');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

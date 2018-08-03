@@ -10,6 +10,8 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cityinfodb');
 require('./models/Bericht');
 require('./models/Reactie');
+require('./models/Categorie');
+require('./models/Regio');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
