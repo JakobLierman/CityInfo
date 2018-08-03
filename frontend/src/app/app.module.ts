@@ -1,36 +1,27 @@
-import { BrowserModule } from "@angular/platform-browser";
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from "@angular/core";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HttpClientModule } from "@angular/common/http";
-
+import { BrowserModule } from "@angular/platform-browser";
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from "./app.component";
-import { BerichtComponent } from "./bericht/bericht/bericht.component";
-import { BerichtToevoegenComponent } from "./bericht/bericht-toevoegen/bericht-toevoegen.component";
 import { HomeComponent } from "./home/home.component";
 import { PaginaNietGevondenComponent } from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
-import { BerichtLijstComponent } from './bericht/bericht-lijst/bericht-lijst.component';
-import { BerichtDetailComponent } from './bericht/bericht-detail/bericht-detail.component';
-import { ReactieComponent } from './bericht/reactie/reactie.component';
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BerichtComponent,
-    BerichtToevoegenComponent,
     HomeComponent,
-    PaginaNietGevondenComponent,
-    BerichtLijstComponent,
-    BerichtDetailComponent,
-    ReactieComponent
+    PaginaNietGevondenComponent
   ],
   imports: [
     BrowserModule,
+    UserModule,
+    AppRoutingModule,
     HttpClientModule,
-    NgbModule.forRoot(),
-    AppRoutingModule
+    ReactiveFormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
