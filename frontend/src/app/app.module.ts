@@ -7,13 +7,15 @@ import { HomeComponent } from "./home/home.component";
 import { PaginaNietGevondenComponent } from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BerichtFilterPipe } from './bericht/bericht-filter.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PaginaNietGevondenComponent
+    PaginaNietGevondenComponent,
+    BerichtFilterPipe
   ],
   imports: [
     BrowserModule,
