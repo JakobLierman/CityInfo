@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { httpInterceptorProviders, basehttpInterceptorProviders } from './../http-interceptors/index';
 import { BerichtDataService } from './bericht-data.service';
 import { BerichtDetailComponent } from './bericht-detail/bericht-detail.component';
 import { BerichtLijstComponent } from './bericht-lijst/bericht-lijst.component';
@@ -18,12 +19,6 @@ const routes = [
 ];
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(routes)
-  ],
   declarations: [
     BerichtComponent,
     ReactieComponent,
@@ -31,6 +26,15 @@ const routes = [
     BerichtLijstComponent,
     BerichtDetailComponent
   ],
-  providers: [ BerichtDataService, BerichtResolver ]
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
+  ],
+  providers: [
+    basehttpInterceptorProviders,
+    httpInterceptorProviders,
+  ]
 })
 export class BerichtModule { }

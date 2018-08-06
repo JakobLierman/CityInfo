@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 let passport = require('passport');
 
 // mongoose
-mongoose.connect('mongodb://localhost/cityinfodb');
+mongoose.connect(process.env.CITYINFO_DATABASE);
 require('./models/Bericht');
 require('./models/Reactie');
 require('./models/Categorie');
@@ -22,6 +22,10 @@ var users = require('./routes/users');
 
 var app = express();
 
+// cors for cross origin requests
+let cors = require('cors');
+app.use(cors({ origin: '*' }));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -32,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/API/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,3 +1,4 @@
+import { basehttpInterceptorProviders } from './../http-interceptors/index';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +26,7 @@ const routes = [
     LoginComponent,
     // LogoutComponent,
     RegisterComponent],
-  providers: [
+  providers: [ basehttpInterceptorProviders,
     AuthenticationService
   ],
   exports: [
