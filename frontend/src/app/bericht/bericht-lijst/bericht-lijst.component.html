@@ -1,3 +1,6 @@
-<p>
-  bericht-lijst works!
-</p>
+<div>
+  <input (keyup)='filterBericht$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='Zoeken op titel' data-test="berichtList">
+</div>
+<div>
+  <app-bericht *ngFor='let localBericht of berichten | berichtFilter:filterBerichtTitel' [bericht]='localBericht'></app-bericht>
+</div>

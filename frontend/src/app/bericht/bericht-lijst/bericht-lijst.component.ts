@@ -11,7 +11,7 @@ import { Bericht } from '../bericht.model';
   styleUrls: ['./bericht-lijst.component.css']
 })
 export class BerichtLijstComponent implements OnInit {
-  public filterBerichtNaam: string;
+  public filterBerichtTitel: string;
   public filterBericht$ = new Subject<string>();
 
   public errorMsg: string;
@@ -25,7 +25,7 @@ export class BerichtLijstComponent implements OnInit {
         debounceTime(400),
         map(val => val.toLowerCase())
       )
-      .subscribe(val => (this.filterBerichtNaam = val));
+      .subscribe(val => (this.filterBerichtTitel = val));
   }
 
   ngOnInit(): void {
