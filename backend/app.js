@@ -8,7 +8,9 @@ var mongoose = require('mongoose');
 let passport = require('passport');
 
 // mongoose
-mongoose.connect(process.env.CITYINFO_DATABASE);
+mongoose.connect(
+  process.env.CITYINFO_DATABASE || 'mongodb://localhost/cityinfodb'
+);
 require('./models/Bericht');
 require('./models/Reactie');
 require('./models/Categorie');

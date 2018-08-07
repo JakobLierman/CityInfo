@@ -8,12 +8,12 @@ let ReactieSchema = new mongoose.Schema({
 });
 
 ReactieSchema.pre('remove', function(next) {
-    this.model('Reactie').update(
-        {},
-        { $pull: { reacties: this._id } },
-        { safe: true, multi: true },
-        next
-    );
+  this.model('Reactie').update(
+    {},
+    { $pull: { reacties: this._id } },
+    { safe: true, multi: true },
+    next
+  );
 });
 
 mongoose.model('Reactie', ReactieSchema);

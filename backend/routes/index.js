@@ -61,11 +61,12 @@ router.post('/API/reset_db', (req, res, next) => {
     berichten.forEach(bericht => bericht.remove());
   });
   Reactie.find({}, (err, reacties) => {
-    reacties.forEach(reactie => reactie.remove())
+    reacties.forEach(reactie => reactie.remove());
   });
   /* User.find({}, (err, users) => {
       users.forEach(user=> user.remove());
   }); */
+  res.send('Reset complete.');
   res.status(204).end();
 });
 
