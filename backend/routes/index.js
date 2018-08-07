@@ -16,8 +16,10 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET berichten */
-router.get('/API/berichten/', auth, function(req, res, next) {
-  Bericht.find(function(err, berichten) {
+router.get('/API/berichten', function(req, res, next) {
+  // auth toevoegen
+  let query = Bericht.find().populate('reacties');
+  query.exec(function(err, berichten) {
     if (err) {
       return next(err);
     }
@@ -26,9 +28,9 @@ router.get('/API/berichten/', auth, function(req, res, next) {
 });
 
 /* POST bericht */
-router.post('/API/berichten/', auth, function(req, res, next) {
-  let bericht = new Bericht(req.body);
-  bericht.save(function(err, rec) {
+router.post('/API/berichten/', function(req, res, next) {
+  // auth toevoegen
+  Reactie.create(req.body.reacties, function(err, reacs) {
     if (err) {
       return next(err);
     }
@@ -50,7 +52,8 @@ router.post('/API/berichten/', auth, function(req, res, next) {
 });
 
 /* GET reacties van bericht */
-router.get('/API/reacties', auth, function(req, res, next) {
+router.get('/API/reacties', function(req, res, next) {
+  // auth toevoegen
   Reactie.find(function(err, reacties) {
     if (err) {
       return next(err);
@@ -60,10 +63,13 @@ router.get('/API/reacties', auth, function(req, res, next) {
 });
 
 /* POST reactie op bericht */
-router.post('/API/reacties', auth, function(req, res, next) {
+router.post('/API/reacties', function(req, res, next) {
+  // auth toevoegen
   let reactie = new Reactie(req.body);
   reactie.save(function(err, rec) {
-    if (err) { return next(err); }
+    if (err) {
+      return next(err);
+    }
     res.json(rec);
   });
 });

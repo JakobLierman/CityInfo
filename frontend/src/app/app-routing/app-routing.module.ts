@@ -1,3 +1,4 @@
+import { AuthGuardService } from '../user/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
@@ -7,6 +8,7 @@ import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
 const appRoutes: Routes = [
   {
     path: 'bericht',
+    canActivate: [AuthGuardService],
     loadChildren: 'app/bericht/bericht.module#BerichtModule',
     data: { preload: true }
   },
@@ -16,9 +18,13 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: SelectivePreloadStrategy })],
-  declarations: [],
+  imports: [
+    RouterModule.forRoot(appRoutes, {
+      preloadingStrategy: SelectivePreloadStrategy
+    })
+  ],
   providers: [SelectivePreloadStrategy],
+  declarations: [],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
