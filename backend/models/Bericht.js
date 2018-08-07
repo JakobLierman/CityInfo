@@ -7,7 +7,10 @@ let BerichtSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Categorie'
   },
-  user: String, // Should be user
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   dateAdded: { type: Date, default: Date.now },
   reacties: [
     {

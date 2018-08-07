@@ -1,10 +1,16 @@
 let mongoose = require('mongoose');
 
 let ReactieSchema = new mongoose.Schema({
-    bericht: String, // Should be bericht
-    boodschap: String,
-    user: String, // Should be user
-    dateAdded: { type: Date, default: Date.now }
+  boodschap: String,
+  bericht: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bericht'
+  },
+  user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+  },
+  dateAdded: { type: Date, default: Date.now }
 });
 
 ReactieSchema.pre('remove', function(next) {

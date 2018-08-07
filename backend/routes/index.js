@@ -32,7 +32,20 @@ router.post('/API/berichten/', auth, function(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.json(rec);
+    let bericht = new Bericht({
+      titel: req.body.titel,
+      boodschap: req.body.boodschap,
+      categorie: req.body.categorie._id
+    });
+    bericht.reacties = reacs;
+    bericht.user = req.user._id;
+    bericht.save(function(err, rec) {
+      if (err) {
+        Ingredient.remove({ _id: { $in: bericht.reacties } });
+        return next(err);
+      }
+      res.json(rec);
+    });
   });
 });
 
