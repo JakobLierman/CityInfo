@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 
   serverSideValidateUsername(): ValidatorFn {
     return (control: AbstractControl): Observable<{ [key: string]: any }> => {
-      return this.authenticationService.checkUsernameAvailability(control.value).pipe(
+      return this.authenticationService.checkUserNameAvailability(control.value).pipe(
         map(available => {
           if (available) {
             return null;

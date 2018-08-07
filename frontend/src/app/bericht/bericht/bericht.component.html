@@ -2,9 +2,13 @@
     <div class="card-body">
         <h5 class="card-title">{{ bericht.titel }}</h5>
         <p class="card-text">{{ bericht.boodschap }}</p>
-        <p class="card-text"><small class="text-muted">Door {{ bericht.user }} om {{ bericht.dateAdded }}.</small></p>
+        <p class="card-text">
+            <small class="text-muted">Door {{ bericht.user }} om {{ bericht.dateAdded }}.</small>
+        </p>
         <a href="#" class="btn btn-secondary">Openen</a>
         <a href="#" class="btn btn-secondary">Reageer</a>
     </div>
+    <!--
     <div class="card-footer text-muted">{{ bericht.reacties.count() }} reacties.</div>
+    -->
 </div>
