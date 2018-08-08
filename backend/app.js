@@ -23,13 +23,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
 // cors for cross origin requests
 let cors = require('cors');
 app.use(cors({ origin: '*' }));
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
