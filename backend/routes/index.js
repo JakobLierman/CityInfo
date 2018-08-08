@@ -51,8 +51,10 @@ router.post('/API/berichten/', function(req, res, next) {
   });
 });
 
+/* DELETE bericht */
+
 /* GET reacties van bericht */
-router.get('/API/reacties', function(req, res, next) {
+/* router.get('/API/bericht/:bericht/reacties', function(req, res, next) {
   // auth toevoegen
   Reactie.find(function(err, reacties) {
     if (err) {
@@ -60,19 +62,49 @@ router.get('/API/reacties', function(req, res, next) {
     }
     res.json(reacties);
   });
-});
+}); */
 
 /* POST reactie op bericht */
-router.post('/API/reacties', function(req, res, next) {
+/* router.post('/API/bericht/:bericht/reacties', function(req, res, next) {
   // auth toevoegen
   let reactie = new Reactie(req.body);
-  reactie.save(function(err, rec) {
+  reactie.save(function(err, reactie) {
+    if (err) {
+      return next(err);
+    }
+    req.bericht.reacties.pus(reactie);
+    req.bericht.save(funtion (err, rec) {
+      if (err) {
+        return next(err);
+      }
+      res.json(reactie);
+    });
+  });
+}); */
+
+/* GET alle categorieen */
+router.get('/API/categorieen', function(req, res, next) {
+  Categorie.find(function(err, categorieen) {
+    if (err) {
+      return next(err);
+    }
+    res.json(categorieen);
+  });
+});
+
+/* POST Categorie */
+router.post('/API/categorieen', function(req, res, next) {
+  // auth toevoegen ?
+  let categorie = new Categorie({ naam: req.body.naam, graad: req.body.graad });
+  categorie.save(function(err, rec) {
     if (err) {
       return next(err);
     }
     res.json(rec);
   });
 });
+
+/* DELETE categorie */
 
 /* RESET DATABASE */
 router.post('/API/reset_db', (req, res, next) => {
@@ -82,9 +114,15 @@ router.post('/API/reset_db', (req, res, next) => {
   Reactie.find({}, (err, reacties) => {
     reacties.forEach(reactie => reactie.remove());
   });
-  /* User.find({}, (err, users) => {
-      users.forEach(user=> user.remove());
-  }); */
+  Categorie.find({}, (err, categorieen) => {
+    categorieen.forEach(categorie => categorie.remove());
+  });
+  Regio.find({}, (err, regios) => {
+    regios.forEach(regio => regio.remove());
+  });
+  User.find({}, (err, users) => {
+    users.forEach(user => user.remove());
+  });
   res.send('Reset complete.');
   res.status(204).end();
 });
