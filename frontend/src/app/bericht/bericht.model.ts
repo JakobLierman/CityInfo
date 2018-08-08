@@ -10,6 +10,15 @@ export class Categorie {
     this._graad = graad;
   }
 
+  static fromJSON(json: any): Categorie {
+    const rec = new Categorie(
+      json.naam,
+      json.graad
+    );
+    rec._id = json._id;
+    return rec;
+  }
+
   get id(): number {
     return this._id;
   }
