@@ -1,5 +1,4 @@
-<!--
-<form [formGroup]='bericht' (ngSubmit)='onSubmit()' class="col-xl-6 col-sm-12">
+<form [formGroup]='bericht' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
   <h2>Bericht toevoegen</h2>
   <div class="form-group">
     <input class="form-control" id="titel" placeholder="Titel" #berichtTitel>
@@ -10,12 +9,8 @@
   <div class="form-group">
     <label for="categorie">Categorie</label>
     <select class="form-control" id="categorie" #categorie>
-      <option>Algemeen</option>
-      <option>Categorie 1</option>
-      <option>Categorie 2</option>
-      <option>Categorie 3</option>
+      <option *ngFor='let cat of categorieen' value="{{ cat.id }}">{{ cat.naam }}</option>
     </select>
   </div>
-  <button (click)="berichtToevoegen(berichtTitel, berichtTekst)" type="submit" class="btn btn-primary">Bericht plaatsen</button>
+  <button type="submit" class="btn btn-primary">Bericht plaatsen</button>
 </form>
--->
