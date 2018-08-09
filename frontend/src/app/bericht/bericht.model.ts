@@ -104,6 +104,10 @@ export class Bericht {
     return this._reacties;
   }
 
+  isNieuw(): boolean {
+    return this._dateAdded.getDate() === new Date().getDate();
+  }
+
   reactieToevoegen(reactie: Reactie) {
     this._reacties.push(reactie);
   }

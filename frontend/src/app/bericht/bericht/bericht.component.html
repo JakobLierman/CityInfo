@@ -1,6 +1,6 @@
 <div class="card shadow bg-white rounded mb-4 mt-4" [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
     <div class="card-body">
-        <h5 class="card-title">{{ bericht.titel }}</h5>
+        <h3 class="card-title">{{ bericht.titel }} <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span></h3>
         <p class="card-text">{{ bericht.boodschap | slice: 0:500 }}
             <br>
             <i class="text-muted" *ngIf='bericht.boodschap.length > 500'>Open het bericht om alles weer te geven.</i>
@@ -10,8 +10,8 @@
                 <br>{{ bericht.reacties.length }} reacties.</small>
         </p>
         <div class="btn-group" role="group">
-            <a class="btn btn-primary btn-sm" routerLink="/bericht/{{ bericht.id }}">Openen</a>
-            <a class="btn btn-secondary btn-sm" routerLink="">Reageer</a>
+            <a class="btn btn-primary" routerLink="/bericht/{{ bericht.id }}">Openen</a>
+            <a class="btn btn-secondary" routerLink="/bericht/{{ bericht.id }}" fragment="reageren">Reageer</a>
         </div>
     </div>
     <div class="card-footer text-muted">Door (( bericht.user.username )) op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{ bericht.dateAdded | date:
