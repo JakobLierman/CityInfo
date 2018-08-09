@@ -1,21 +1,19 @@
 import { User } from './../../user/user.model';
 
 export class Reactie {
-  private _id: number;
+  private _id: string;
   private _boodschap: string;
   private _user: User;
   private _dateAdded: Date = new Date();
 
-  constructor(boodschap: string, user: User = null, dateAdded: Date = null) {
+  constructor(boodschap: string, dateAdded: Date = null) {
     this._boodschap = boodschap;
-    this._user = user; // ? currentUser;
     this._dateAdded = dateAdded ? dateAdded : new Date();
   }
 
   static fromJSON(json: any): Reactie {
     const rec = new Reactie(
       json.boodschap,
-      json.user,
       json.created
     );
     rec._id = json._id;
@@ -31,7 +29,7 @@ export class Reactie {
     };
   }
 
-  get id(): number {
+  get id(): string {
       return this._id;
   }
 
