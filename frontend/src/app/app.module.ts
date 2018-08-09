@@ -7,6 +7,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
+import { NavigationModule } from './navigation/navigation.module';
 import { PaginaNietGevondenComponent } from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
 import { UserModule } from './user/user.module';
 
@@ -23,7 +24,8 @@ registerLocaleData(localeNl, 'nl-BE');
     UserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NavigationModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: "nl-BE" }],
   bootstrap: [AppComponent]

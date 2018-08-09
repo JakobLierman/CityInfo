@@ -3,7 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { httpInterceptorProviders, basehttpInterceptorProviders } from './../http-interceptors/index';
+import { basehttpInterceptorProviders, httpInterceptorProviders } from './../http-interceptors/index';
+import { NavigationModule } from './../navigation/navigation.module';
 import { BerichtDataService } from './bericht-data.service';
 import { BerichtDetailComponent } from './bericht-detail/bericht-detail.component';
 import { BerichtFilterPipe } from './bericht-filter.pipe';
@@ -32,6 +33,7 @@ const routes = [
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    NavigationModule,
     RouterModule.forChild(routes)
   ],
   providers: [
