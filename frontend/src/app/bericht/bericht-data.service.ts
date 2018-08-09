@@ -19,14 +19,14 @@ export class BerichtDataService {
 
   berichtToevoegen(bericht: Bericht): Observable<Bericht> {
     return this.http
-    .post(`${this._appUrl}/berichten/`, bericht)
-    .pipe(map(Bericht.fromJSON));
+      .post(`${this._appUrl}/berichten/`, bericht)
+      .pipe(map(Bericht.fromJSON));
   }
 
   verwijderBericht(bericht: Bericht): Observable<Bericht> {
     return this.http
-    .delete(`${this._appUrl}/bericht/${bericht.id}`)
-    .pipe(map(Bericht.fromJSON));
+      .delete(`${this._appUrl}/bericht/${bericht.id}`)
+      .pipe(map(Bericht.fromJSON));
   }
 
   getBerichtById(id: string): Observable<Bericht> {
@@ -38,19 +38,19 @@ export class BerichtDataService {
   // Categorieen
   get categorieen(): Observable<Categorie[]> {
     return this.http
-    .get(`${this._appUrl}/categorieen/`)
-    .pipe(map((list: any[]): Categorie[] => list.map(Categorie.fromJSON)));
+      .get(`${this._appUrl}/categorieen/`)
+      .pipe(map((list: any[]): Categorie[] => list.map(Categorie.fromJSON)));
   }
 
   categorieToevoegen(categorie: Categorie): Observable<Categorie> {
     return this.http
-    .post(`${this._appUrl}/categorieen/`, categorie)
-    .pipe(map(Categorie.fromJSON));
+      .post(`${this._appUrl}/categorieen/`, categorie)
+      .pipe(map(Categorie.fromJSON));
   }
 
   categorieVerwijderen(categorie: Categorie): Observable<Categorie> {
     return this.http
-    .delete(`${this._appUrl}/categorie/${categorie.id}`)
-    .pipe(map(Categorie.fromJSON));
+      .delete(`${this._appUrl}/categorie/${categorie.id}`)
+      .pipe(map(Categorie.fromJSON));
   }
 }

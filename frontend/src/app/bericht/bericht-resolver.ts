@@ -10,9 +10,9 @@ import { BerichtDataService } from './bericht-data.service';
 
 @Injectable()
 export class BerichtResolver implements Resolve<Bericht> {
-    constructor(private berichtService: BerichtDataService) { }
+    constructor(private berichtDataService: BerichtDataService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Bericht> {
-        return this.berichtService.getBerichtById(route.params['id']);
+        return this.berichtDataService.getBerichtById(route.params['id']);
     }
 }

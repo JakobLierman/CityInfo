@@ -5,17 +5,14 @@ export class Categorie {
   private _id: number;
   private _naam: string;
   private _graad: number;
-  
+
   constructor(naam: string, graad: number = null) {
     this._naam = naam;
     this._graad = graad;
   }
 
   static fromJSON(json: any): Categorie {
-    const rec = new Categorie(
-      json.naam,
-      json.graad
-    );
+    const rec = new Categorie(json.naam, json.graad);
     rec._id = json._id;
     return rec;
   }
@@ -34,19 +31,23 @@ export class Categorie {
 }
 
 export class Bericht {
-  private _id: number;
+  private _id: string;
   private _titel: string;
   private _boodschap: string;
   private _categorie: Categorie;
   private _user: User;
   private _dateAdded: Date = new Date();
-  private _reacties: [Reactie];
+  private _reacties: Reactie[];
 
-  constructor(titel: string, boodschap: string, categorie: Categorie, user: User = null, dateAdded: Date = null) {
+  constructor(
+    titel: string,
+    boodschap: string,
+    categorie: Categorie,
+    dateAdded: Date = null
+  ) {
     this._titel = titel;
     this._boodschap = boodschap;
     this._categorie = categorie;
-    this._user = user; // ? currentUser;
     this._dateAdded = dateAdded ? dateAdded : new Date();
   }
 
@@ -55,10 +56,10 @@ export class Bericht {
       json.titel,
       json.boodschap,
       json.categorie,
-      json.user,
       json.created
     );
     rec._id = json._id;
+    rec._user = json.user;
     rec._reacties = json.reacties.map(Reactie.fromJSON);
     return rec;
   }
@@ -69,14 +70,14 @@ export class Bericht {
       titel: this._titel,
       boodschap: this._boodschap,
       categorie: this._categorie,
-      user: this._user,
-      created: this._dateAdded,
+      user: this._user, // currentUser?
+      created: this._dateAdded
       // reacties: this._reacties.map(rea => rea.toJSON())
     };
   }
 
-  get id(): number {
-      return this._id;
+  get id(): string {
+    return this._id;
   }
 
   get titel(): string {
@@ -86,10 +87,6 @@ export class Bericht {
   get boodschap(): string {
     return this._boodschap;
   }
-
- /*  get regio(): string { // Should be regio ???
-    return REGIO_VAN_USER;
-  } */
 
   get categorie(): Categorie {
     return this._categorie;
@@ -103,7 +100,11 @@ export class Bericht {
     return this._dateAdded;
   }
 
-  get reacties(): [Reactie] {
+  get reacties(): Reactie[] {
     return this._reacties;
+  }
+
+  reactieToevoegen(reactie: Reactie) {
+    this._reacties.push(reactie);
   }
 }
