@@ -1,5 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from "@angular/core";
+import localeNl from '@angular/common/locales/nl';
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -8,6 +10,7 @@ import { HomeComponent } from "./home/home.component";
 import { PaginaNietGevondenComponent } from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
 import { UserModule } from './user/user.module';
 
+registerLocaleData(localeNl, 'nl-BE');
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { UserModule } from './user/user.module';
     HttpClientModule,
     ReactiveFormsModule
   ],
+  providers: [{ provide: LOCALE_ID, useValue: "nl-BE" }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
