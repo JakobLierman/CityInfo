@@ -1,14 +1,20 @@
-<div class="card" ng-class="{'border-primary': bericht.user == 'Politie'}">
+<div class="card shadow bg-white rounded mb-4 mt-4" [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
     <div class="card-body">
         <h5 class="card-title">{{ bericht.titel }}</h5>
-        <p class="card-text">{{ bericht.boodschap }}</p>
-        <p class="card-text">
-            <small class="text-muted">Door {{ bericht.user }} om {{ bericht.dateAdded }}.</small>
+        <p class="card-text">{{ bericht.boodschap | slice: 0:500 }}
+            <br>
+            <i class="text-muted" *ngIf='bericht.boodschap.length > 500'>Open het bericht om alles weer te geven.</i>
         </p>
-        <a href="#" class="btn btn-secondary">Openen</a>
-        <a href="#" class="btn btn-secondary">Reageer</a>
+        <p class="card-text">
+            <small class="text-muted">Categorie: {{ bericht.categorie.naam }}
+                <br>{{ bericht.reacties.length }} reacties.</small>
+        </p>
+        <div class="btn-group" role="group">
+            <a class="btn btn-primary btn-sm" routerLink="/bericht/{{ bericht.id }}">Openen</a>
+            <a class="btn btn-secondary btn-sm" routerLink="">Reageer</a>
+        </div>
     </div>
-    <!--
-    <div class="card-footer text-muted">{{ bericht.reacties.count() }} reacties.</div>
-    -->
+    <div class="card-footer text-muted">Door (( bericht.user.username )) op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{ bericht.dateAdded | date:
+        'H:mm' }}.
+    </div>
 </div>

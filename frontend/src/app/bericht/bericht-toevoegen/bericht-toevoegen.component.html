@@ -1,16 +1,58 @@
 <form [formGroup]='bericht' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
   <h2>Bericht toevoegen</h2>
-  <div class="form-group">
-    <input class="form-control" id="titel" placeholder="Titel" #berichtTitel>
+
+  <div *ngIf='errorMsg' class="alert alert-danger alert-dismissible fade show" role="alert">{{ errorMsg }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">
+        <i class="material-icons">clear</i>
+      </span>
+    </button>
   </div>
+
   <div class="form-group">
-    <textarea class="form-control" id="bericht" rows="5" placeholder="Voer hier je bericht in." #berichtTekst></textarea>
+    <input [ngClass]='{"is-invalid": !!bericht.get("titel").errors && (bericht.get("titel").touched || bericht.get("titel").dirty)}'
+      class="form-control" id="titel" name="titel" formControlName='titel' minlength="2" placeholder="Titel" required>
   </div>
+
   <div class="form-group">
-    <label for="categorie">Categorie</label>
-    <select class="form-control" id="categorie" #categorie>
+    <textarea [ngClass]='{"is-invalid": !!bericht.get("boodschap").errors && (bericht.get("boodschap").touched || bericht.get("boodschap").dirty)}'
+      class="form-control" id="boodschap" formControlName='boodschap' rows="5" placeholder="Voer hier je bericht in." required></textarea>
+  </div>
+
+  <div class="form-group">
+    <select [ngClass]='{"is-invalid": !!bericht.get("categorie").errors && (bericht.get("categorie").touched || bericht.get("categorie").dirty)}'
+      class="form-control" id="categorie" formControlName='categorie' minlength="25" required>
+      <option option disabled selected value>Kies een categorie</option>
       <option *ngFor='let cat of categorieen' value="{{ cat.id }}">{{ cat.naam }}</option>
     </select>
   </div>
+
+  <div *ngIf='!!bericht.get("titel").errors?.required && (bericht.get("titel").touched || bericht.get("titel").dirty)' class="alert alert-danger"
+    role="alert">
+    <strong>Oeps, foutje!</strong> Een bericht moet een titel hebben.
+  </div>
+  <div *ngIf='!bericht.get("titel").errors?.required && !!bericht.get("titel").errors?.minLength !== null && (bericht.get("titel").touched || bericht.get("titel").dirty)'
+    class="alert alert-danger" role="alert">
+    <strong>Ach!</strong> De titel moet wat langer zijn.
+  </div>
+  <div *ngIf='!bericht.get("titel").errors?.required && !!bericht.get("titel").errors?.maxLength !== null && (bericht.get("titel").touched || bericht.get("titel").dirty)'
+    class="alert alert-danger" role="alert">
+    <strong>Ach!</strong> De titel moet wat korter zijn.
+  </div>
+  <div *ngIf='!!bericht.get("boodschap").errors?.required && (bericht.get("boodschap").touched || bericht.get("boodschap").dirty)'
+    class="alert alert-danger" role="alert">
+    <strong>Je doet je best niet!</strong> Een bericht kan niet leeg zijn.
+  </div>
+  <div *ngIf='!bericht.get("boodschap").errors?.required && !!bericht.get("boodschap").errors?.minLength !== null && (bericht.get("boodschap").touched || bericht.get("boodschap").dirty)'
+    class="alert alert-danger" role="alert">
+    <strong>Te kort!</strong> Een bericht moet minstens 25 tekens bevatten.
+  </div>
+  <div *ngIf='!!bericht.get("categorie").errors?.required && (bericht.get("categorie").touched || bericht.get("categorie").dirty)'
+    class="alert alert-danger" role="alert">
+    <strong>Probeer nog eens!</strong> Je hebt nog geen categorie geselecteerd.
+  </div>
+
+  [disabled]="!bericht.valid"
+
   <button type="submit" class="btn btn-primary">Bericht plaatsen</button>
 </form>
