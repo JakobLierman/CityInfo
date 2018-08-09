@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 /* GET berichten */
 router.get('/API/berichten', function(req, res, next) {
   // auth toevoegen
-  let query = Bericht.find().populate('reacties');
+  let query = Bericht.find().populate('reacties').populate('categorie').populate('user');
   query.exec(function(err, berichten) {
     if (err) {
       return next(err);
@@ -30,25 +30,15 @@ router.get('/API/berichten', function(req, res, next) {
 /* POST bericht */
 router.post('/API/berichten/', function(req, res, next) {
   // auth toevoegen
-  Reactie.create(req.body.reacties, function(err, reacs) {
+  let bericht = new Bericht({ titel: req.body.titel, boodschap: req.body.boodschap, categorie: req.body.categorie });
+  // bericht.user = req.user._id;
+  bericht.reacties = [];
+  bericht.save(function(err, rec) {
     if (err) {
       return next(err);
     }
-    let bericht = new Bericht({
-      titel: req.body.titel,
-      boodschap: req.body.boodschap,
-      categorie: req.body.categorie._id
-    });
-    bericht.reacties = reacs;
-    bericht.user = req.user._id;
-    bericht.save(function(err, rec) {
-      if (err) {
-        Ingredient.remove({ _id: { $in: bericht.reacties } });
-        return next(err);
-      }
-      res.json(rec);
-    });
-  });
+    res.json(rec);
+  })
 });
 
 /* DELETE bericht */
@@ -114,9 +104,9 @@ router.post('/API/reset_db', (req, res, next) => {
   Reactie.find({}, (err, reacties) => {
     reacties.forEach(reactie => reactie.remove());
   });
-  Categorie.find({}, (err, categorieen) => {
+/*   Categorie.find({}, (err, categorieen) => {
     categorieen.forEach(categorie => categorie.remove());
-  });
+  }); */
   Regio.find({}, (err, regios) => {
     regios.forEach(regio => regio.remove());
   });
