@@ -9,6 +9,6 @@ app.listen(process.env.PORT, function() {
 	console.log("Server running on port 8080.");
 });
 
-// Serve ww folder
+// Serve www folder
 app.use(express.static(__dirname + 'www'));
 app.use('*', express.static(__dirname / 'www/index.html'));
