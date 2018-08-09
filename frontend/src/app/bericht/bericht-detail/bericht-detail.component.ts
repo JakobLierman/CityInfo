@@ -19,12 +19,12 @@ export class BerichtDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(
-      item => (this._bericht = item['bericht'])/*,
+      item => (this._bericht = item['bericht']),
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } while trying to retrieve Bericht: ${error.error}`;
-      } */
+        } bij het ophalen van het bericht: ${error.error}`;
+      }
      );
   }
 }

@@ -34,7 +34,7 @@ export class BerichtLijstComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } while trying to retrieve recipes: ${error.error}`;
+        } bij het ophalen van de berichten: ${error.error}`;
       }
     );
   }
@@ -47,9 +47,7 @@ export class BerichtLijstComponent implements OnInit {
     this._berichtDataService.verwijderBericht(bericht).subscribe(
       item => (this._berichten = this._berichten.filter(val => item.id !== val.id)),
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} while removing Berichten for ${
-          bericht.titel
-        }: ${error.error}`;
+        this.errorMsg = `Error ${error.status} bij het verwijderen van bericht met titel "${bericht.titel}": ${error.error}`;
       }
     );
   }
