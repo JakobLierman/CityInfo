@@ -8,7 +8,7 @@ import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
 const appRoutes: Routes = [
   {
     path: 'bericht',
-    canActivate: [AuthGuardService],
+    // canActivate: [AuthGuardService],
     loadChildren: 'app/bericht/bericht.module#BerichtModule',
     data: { preload: true }
   },

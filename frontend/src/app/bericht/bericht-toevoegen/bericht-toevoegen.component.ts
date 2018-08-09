@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { BerichtDataService } from './../bericht-data.service';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Bericht, Categorie } from '../bericht.model';
+import { BerichtDataService } from './../bericht-data.service';
+
 
 @Component({
   selector: 'app-bericht-toevoegen',
@@ -17,18 +18,20 @@ export class BerichtToevoegenComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _berichtDataServive: BerichtDataService
+    private _berichtDataService: BerichtDataService
   ) {}
 
   ngOnInit() {
-    this._berichtDataServive.categorieen.subscribe(
+    this._berichtDataService.categorieen.subscribe(
       categorieen => (this._categorieen = categorieen),
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} while trying to recieve Categorieen: ${error.error}`;
+        this.errorMsg = `Error ${
+          error.status
+        } bij het ophalen van de categorieën: ${error.error}`;
       }
     );
     this.bericht = this.fb.group({
-      titel: ['', [Validators.required, Validators.minLength(2)]],
+      titel: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       boodschap: ['', [Validators.required, Validators.minLength(25)]],
       categorie: ['', [Validators.required]]
     });
@@ -45,14 +48,14 @@ export class BerichtToevoegenComponent implements OnInit {
       this.bericht.value.categorie
     );
 
-    this._berichtDataServive.berichtToevoegen(bericht).subscribe(
+    this._berichtDataService.berichtToevoegen(bericht).subscribe(
       () => {
         this.bericht.reset();
       },
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} while adding Bericht for ${
+        this.errorMsg = `Error ${error.status} bij het toevoegen van bericht met titel "${
           bericht.titel
-        }: ${error.error}`;
+        }": ${error.error}`;
       }
     );
   }

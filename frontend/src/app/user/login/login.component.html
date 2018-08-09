@@ -2,7 +2,7 @@
 
 <div *ngIf='errorMsg' class="alert alert-danger">{{errorMsg}}</div>
 
-<form [formGroup]='user' (ngSubmit)='onSubmit()' class="col-md-8">
+<form [formGroup]='user' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
   <div class="form-group">
     <label for="username">Gebruikersnaam:</label>
     <input type="text" class="form-control" id="username" formControlName='username' placeholder="Gebruikersnaam" required>

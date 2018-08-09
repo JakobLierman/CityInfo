@@ -1,3 +1,4 @@
+import { User } from './../user/user.model';
 import { Reactie } from './reactie/reactie.model';
 
 export class Categorie {
@@ -37,15 +38,15 @@ export class Bericht {
   private _titel: string;
   private _boodschap: string;
   private _categorie: Categorie;
-  private _user: string; // Should be user
+  private _user: User;
   private _dateAdded: Date = new Date();
   private _reacties: [Reactie];
 
-  constructor(titel: string, boodschap: string, categorie: Categorie, user: string, dateAdded: Date = null) {
+  constructor(titel: string, boodschap: string, categorie: Categorie, user: User = null, dateAdded: Date = null) {
     this._titel = titel;
     this._boodschap = boodschap;
     this._categorie = categorie;
-    this._user = user;
+    this._user = user; // ? currentUser;
     this._dateAdded = dateAdded ? dateAdded : new Date();
   }
 
@@ -89,11 +90,11 @@ export class Bericht {
     return REGIO_VAN_USER;
   } */
 
-  get category(): Categorie {
+  get categorie(): Categorie {
     return this._categorie;
   }
 
-  get user(): string { // Should be user
+  get user(): User {
     return this._user;
   }
 
