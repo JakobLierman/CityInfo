@@ -1,3 +1,4 @@
+import { Reactie } from './reactie/reactie.model';
 import { map } from 'rxjs/operators';
 import { Bericht, Categorie } from './bericht.model';
 import { Injectable } from '@angular/core';
@@ -34,6 +35,14 @@ export class BerichtDataService {
       .get(`${this._appUrl}/bericht/${id}`)
       .pipe(map(Bericht.fromJSON));
   }
+
+  // Reacties
+  voegReactieToeAanBericht(rea: Reactie, ber: Bericht): Observable<Reactie> {
+    const url = `${this._appUrl}/bericht/${ber.id}/reacties`;
+    return this.http.post(url, rea).pipe(map(Reactie.fromJSON));
+  }
+
+  // verwijderReactieVanBericht(rea: Reactie, ber: Bericht): Observable<Reactie> {}
 
   // Categorieen
   get categorieen(): Observable<Categorie[]> {
