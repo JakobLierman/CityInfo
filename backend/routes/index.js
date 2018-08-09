@@ -8,7 +8,7 @@ let Regio = mongoose.model('Regio');
 let User = mongoose.model('User');
 let jwt = require('express-jwt');
 
-let auth = jwt({ secret: process.env.CITYINFO_BACKEND_SECRET });
+// let auth = jwt({ secret: process.env.CITYINFO_BACKEND_SECRET });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
