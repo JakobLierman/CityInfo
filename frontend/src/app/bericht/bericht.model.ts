@@ -59,6 +59,7 @@ export class Bericht {
       json.created
     );
     rec._id = json._id;
+    rec._reacties = json.reacties.map(Reactie.fromJSON);
     return rec;
   }
 
@@ -70,7 +71,7 @@ export class Bericht {
       categorie: this._categorie,
       user: this._user,
       created: this._dateAdded,
-      reacties: this._reacties.map(rea => rea.toJSON())
+      // reacties: this._reacties.map(rea => rea.toJSON())
     };
   }
 
