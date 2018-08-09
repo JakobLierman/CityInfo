@@ -26,12 +26,6 @@
     <div *ngIf='bericht.reacties.length !== 0'>
       <app-reactie *ngFor='let localReactie of bericht.reacties' [reactie]='localReactie'></app-reactie>
     </div>
-    <div class="input-group">
-      <input #reactie type="text" (keyup.enter)="reactieToevoegen(reactie.value)" class="form-control" placeholder="Reactie" id="reageren">
-      <div class="input-group-append">
-        <button (click)="reactieToevoegen(reactie.value)" class="btn btn-primary" type="button">
-          <i class="fas fa-comment"></i> Reageer</button>
-      </div>
-    </div>
+    <app-reactie-toevoegen></app-reactie-toevoegen>
   </div>
 </div>

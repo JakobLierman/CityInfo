@@ -1,0 +1,27 @@
+<form [formGroup]='reactie' (ngSubmit)='onSubmit()'>
+
+  <div *ngIf='errorMsg' class="alert alert-danger alert-dismissible fade show" role="alert">{{ errorMsg }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">
+        <i class="material-icons">clear</i>
+      </span>
+    </button>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <input type="text" (keyup.enter)="onSubmit()" [ngClass]='{"is-invalid": !!reactie.get("boodschap").errors && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)}'
+        class="form-control" formControlName='boodschap' name='boodschap' placeholder="Reactie" id="reageren" required>
+      <div class="input-group-append">
+        <button [disabled]="!reactie.valid" class="btn btn-primary" type="submit">
+          <i class="fas fa-comment"></i> Reageer</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf='!!reactie.get("boodschap").errors?.required && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)'
+    class="alert alert-danger" role="alert">
+    Een reactie kan niet leeg zijn.
+  </div>
+
+</form>

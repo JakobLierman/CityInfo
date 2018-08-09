@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { BerichtDataService } from '../bericht-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Bericht } from '../bericht.model';
@@ -13,9 +12,11 @@ export class BerichtDetailComponent implements OnInit {
   private _bericht: Bericht;
   public errorMsg: string;
 
-  constructor(
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
+
+  get bericht(): Bericht {
+    return this._bericht;
+  }
 
   ngOnInit() {
     this.route.data.subscribe(

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Reactie } from './reactie.model';
+import { Reactie } from '../reactie.model';
 
 @Component({
   selector: 'app-reactie',

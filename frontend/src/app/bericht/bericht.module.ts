@@ -1,3 +1,4 @@
+import { ReactieToevoegenComponent } from './reactie/reactie-toevoegen/reactie-toevoegen.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,7 @@ import { BerichtLijstComponent } from './bericht-lijst/bericht-lijst.component';
 import { BerichtResolver } from './bericht-resolver';
 import { BerichtToevoegenComponent } from './bericht-toevoegen/bericht-toevoegen.component';
 import { BerichtComponent } from './bericht/bericht.component';
-import { ReactieComponent } from './reactie/reactie.component';
+import { ReactieComponent } from './reactie/reactie/reactie.component';
 
 const routes = [
   { path: 'lijst', component: BerichtLijstComponent },
@@ -24,6 +25,7 @@ const routes = [
   declarations: [
     BerichtComponent,
     ReactieComponent,
+    ReactieToevoegenComponent,
     BerichtToevoegenComponent,
     BerichtLijstComponent,
     BerichtFilterPipe,
