@@ -1,3 +1,37 @@
-<p>
-  bericht-detail works!
-</p>
+<div class="container">
+  <div class="row mb-4">
+    <app-back-button></app-back-button>
+    <a *ngIf='true' class="btn btn-danger btn-sm text-white ml-auto">
+      <!-- IF AUTHOR === USER -->
+      <i class="fas fa-trash"></i> Verwijderen
+    </a>
+  </div>
+</div>
+<div class="border rounded" [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
+  <div class="container p-3">
+    <h2>{{ bericht.titel }}
+      <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
+    </h2>
+    <p>{{ bericht.boodschap }}</p>
+    <hr>
+    <p class="text-muted">Categorie: {{ bericht.categorie.naam }}
+      <br>Geschreven door (( bericht.user.username )) op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{ bericht.dateAdded
+      | date: 'H:mm' }}.</p>
+    <hr>
+    <div *ngIf='bericht.reacties.length === 0' class="font-weight-light">
+      <p>
+        <i>Wees de eerste om te reageren!</i>
+      </p>
+    </div>
+    <div *ngIf='bericht.reacties.length !== 0'>
+      <app-reactie *ngFor='let localReactie of bericht.reacties' [reactie]='localReactie'></app-reactie>
+    </div>
+    <div class="input-group">
+      <input #reactie type="text" (keyup.enter)="reactieToevoegen(reactie.value)" class="form-control" placeholder="Reactie" id="reageren">
+      <div class="input-group-append">
+        <button (click)="reactieToevoegen(reactie.value)" class="btn btn-primary" type="button">
+          <i class="fas fa-comment"></i> Reageer</button>
+      </div>
+    </div>
+  </div>
+</div>

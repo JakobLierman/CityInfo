@@ -1,3 +1,12 @@
-<p>
-  reactie works!
-</p>
+<div class="mb-2">
+  <div class="border border-secundary rounded bg-light">
+    <div class="container pl-2 pr-2 mt-2">
+      <p>
+        <span class="font-weight-bold">(( reactie.user.naam ))</span>
+        <br>
+        <span class="text-muted ml-auto">{{ reactie.dateAdded | date: 'd/M/yy, h:mm' }}</span>
+      </p>
+      <p class="font-weight-light">{{ reactie.boodschap }}</p>
+    </div>
+  </div>
+</div>
