@@ -18,11 +18,12 @@ router.get('/', function(req, res, next) {
 /* GET berichten */
 router.get('/API/berichten', function(req, res, next) {
   // auth toevoegen
-  let query = Bericht.find().populate('reacties').populate('categorie').populate('user');
+  let query = Bericht.find()
+    .populate('reacties')
+    .populate('categorie')
+    .populate('user');
   query.exec(function(err, berichten) {
-    if (err) {
-      return next(err);
-    }
+    if (err) return next(err);
     res.json(berichten);
   });
 });
@@ -30,54 +31,76 @@ router.get('/API/berichten', function(req, res, next) {
 /* POST bericht */
 router.post('/API/berichten/', function(req, res, next) {
   // auth toevoegen
-  let bericht = new Bericht({ titel: req.body.titel, boodschap: req.body.boodschap, categorie: req.body.categorie });
+  let bericht = new Bericht({
+    titel: req.body.titel,
+    boodschap: req.body.boodschap,
+    categorie: req.body.categorie
+  });
   // bericht.user = req.user._id;
   bericht.reacties = [];
   bericht.save(function(err, rec) {
-    if (err) {
-      return next(err);
-    }
+    if (err) return next(err);
     res.json(rec);
-  })
+  });
+});
+
+router.param('bericht', function(req, res, next, id) {
+  let query = Bericht.findById(id)
+    .populate('reacties')
+    .populate('categorie')
+    .populate('user');
+  query.exec(function(err, bericht) {
+    if (err) return next(err);
+    if (!bericht) return next(new Error('not found ' + id));
+    req.bericht = bericht;
+    return next();
+  });
+});
+
+/* GET één bericht */
+router.get('/API/bericht/:bericht', function(req, res, next) {
+  res.json(req.bericht);
 });
 
 /* DELETE bericht */
+router.delete('/API/bericht/:bericht', function(req, res) {
+  // auth toevoegen
+  Reactie.remove({ _id: { $re: req.bericht.reacties } }, function(err) {
+    if (err) return next(err);
+    req.bericht.remove(function(err) {
+      if (err) return next(err);
+      res.json(req.bericht);
+    });
+  });
+});
 
 /* GET reacties van bericht */
-/* router.get('/API/bericht/:bericht/reacties', function(req, res, next) {
+router.get('/API/bericht/:bericht/reacties', function(req, res, next) {
   // auth toevoegen
   Reactie.find(function(err, reacties) {
-    if (err) {
-      return next(err);
-    }
+    if (err) return next(err);
     res.json(reacties);
   });
-}); */
+});
 
 /* POST reactie op bericht */
-/* router.post('/API/bericht/:bericht/reacties', function(req, res, next) {
+router.post('/API/bericht/:bericht/reacties', function(req, res, next) {
   // auth toevoegen
   let reactie = new Reactie(req.body);
   reactie.save(function(err, reactie) {
-    if (err) {
-      return next(err);
-    }
-    req.bericht.reacties.pus(reactie);
-    req.bericht.save(funtion (err, rec) {
-      if (err) {
-        return next(err);
-      }
+    if (err) return next(err);
+    req.bericht.reacties.push(reactie);
+    req.bericht.save(function(err, rec) {
+      if (err) return next(err);
       res.json(reactie);
     });
   });
-}); */
+});
 
 /* GET alle categorieen */
 router.get('/API/categorieen', function(req, res, next) {
   Categorie.find(function(err, categorieen) {
-    if (err) {
-      return next(err);
-    }
+    if (err) return next(err);
     res.json(categorieen);
   });
 });
@@ -87,9 +110,7 @@ router.post('/API/categorieen', function(req, res, next) {
   // auth toevoegen ?
   let categorie = new Categorie({ naam: req.body.naam, graad: req.body.graad });
   categorie.save(function(err, rec) {
-    if (err) {
-      return next(err);
-    }
+    if (err) return next(err);
     res.json(rec);
   });
 });
@@ -104,7 +125,7 @@ router.post('/API/reset_db', (req, res, next) => {
   Reactie.find({}, (err, reacties) => {
     reacties.forEach(reactie => reactie.remove());
   });
-/*   Categorie.find({}, (err, categorieen) => {
+  /*   Categorie.find({}, (err, categorieen) => {
     categorieen.forEach(categorie => categorie.remove());
   }); */
   Regio.find({}, (err, regios) => {
