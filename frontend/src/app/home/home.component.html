@@ -2,15 +2,66 @@
   <div class="row">
     <h1 class="display-1">CityInfo</h1>
   </div>
-  <div class="row">
-    <h1>Welkom</h1>
+  <div>
+    <!-- ALS GEBRUIKER NIET INGELOGD IS -->
+    <div class="row">
+      <h1>Welkom</h1>
+    </div>
+    <div class="row">
+      <p>Nieuw in het dorp? Wil je meer info of wil je gewoon je buren beter leren kennen?
+        <br>Registreer je dan nu, het is gratis!</p>
+    </div>
+
+    <div class="row">
+      <a class="btn btn-primary mr-1" routerLink="/registreer">Registreren</a>
+      <a class="btn btn-secondary ml-1" routerLink="/aanmelden">Aanmelden</a>
+    </div>
   </div>
-  <div class="row">
-    <p>Nieuw in het dorp? Wil je meer info of wil je gewoon je buren beter leren kennen?
-      <br>Registreer je dan nu, het is gratis!</p>
-  </div>
-  <div class="row">
-    <a class="btn btn-primary mr-1" routerLink="/registreer">Registreren</a>
-    <a class="btn btn-secondary ml-1" routerLink="/aanmelden">Aanmelden</a>
+
+  <div>
+    <div class="row">
+      <h1>Welkom, (( user.voornaam ))</h1>
+    </div>
+    <div class="row">
+      <p>Welkom terug op CityInfo!
+        <br>Ga snel naar
+        <a routerLink="/bericht/lijst">het overzicht</a> voor alle nieuwtjes uit (( user.regio.naam )).</p>
+    </div>
+    <!-- ALS GEBRUIKER INGELOGD IS -->
+    <div class="row mt-4">
+      <h3>Huidige gebruiker</h3>
+    </div>
+    <div class="row">
+      <table>
+        <tr>
+          <td>
+            <strong>Naam: </strong>
+          </td>
+          <td>(( user.naam ))</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Gebruikersnaam: </strong>
+          </td>
+          <td>(( user.username ))</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>E-mail: </strong>
+          </td>
+          <td>(( user.email ))</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Regio: </strong>
+          </td>
+          <td>(( user.regio.naam ))</td>
+        </tr>
+      </table>
+    </div>
+    <div class="row">
+      <a class="btn btn-primary mt-2 mr-2 d-none" routerLink="/gebruiker/wijzigen">Gegevens wijzigen</a>
+      <a class="btn btn-secondary mt-2" routerLink="/afmelden">Afmelden</a>
+    </div>
   </div>
 </div>
