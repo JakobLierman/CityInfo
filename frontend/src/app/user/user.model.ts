@@ -53,8 +53,16 @@ export class User {
     return this._voornaam;
   }
 
+  set voornaam(voornaam: string) {
+    this._voornaam = voornaam;
+  }
+
   get familienaam(): string {
     return this._familienaam;
+  }
+
+  set familienaam(familienaam: string) {
+    this._familienaam = familienaam;
   }
 
   get naam(): string {

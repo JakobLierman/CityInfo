@@ -14,7 +14,7 @@ export class UserDataService {
   // Regio's
   get regios(): Observable<Regio[]> {
     return this.http
-      .get(`{this._appUrl}/regios/`)
+      .get(`${this._appUrl}/regios/`)
       .pipe(map((list: any[]): Regio[] => list.map(Regio.fromJSON)));
   }
 
