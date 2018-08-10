@@ -18,14 +18,6 @@
       <br>Geschreven door (( bericht.user.username )) op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{ bericht.dateAdded
       | date: 'H:mm' }}.</p>
     <hr>
-    <div *ngIf='bericht.reacties.length === 0' class="font-weight-light">
-      <p>
-        <i>Wees de eerste om te reageren!</i>
-      </p>
-    </div>
-    <div *ngIf='bericht.reacties.length !== 0'>
-      <app-reactie *ngFor='let localReactie of bericht.reacties' [reactie]='localReactie'></app-reactie>
-    </div>
-    <app-reactie-toevoegen></app-reactie-toevoegen>
+    <app-reactie-lijst></app-reactie-lijst>
   </div>
 </div>
