@@ -97,6 +97,25 @@ router.post('/API/bericht/:bericht/reacties', function(req, res, next) {
   });
 });
 
+router.param('reactie', function(req, res, next, id) {
+  let query = Reactie.findById(id);
+  query.exec(function(err, reactie) {
+    if (err) return next(err);
+    if (!reactie) return next(new Error('not found ' + id));
+    req.reactie = reactie;
+    return next();
+  });
+});
+
+/* DELETE één reactie */
+router.delete('/API/bericht/:bericht/reactie/:reactie', function(req, res) {
+  // auth toevoegen
+  req.reactie.remove(function(err) {
+    if (err) return next(err);
+    res.json(req.reactie);
+  });
+});
+
 /* GET alle categorieen */
 router.get('/API/categorieen', function(req, res, next) {
   Categorie.find(function(err, categorieen) {
@@ -116,6 +135,7 @@ router.post('/API/categorieen', function(req, res, next) {
 });
 
 /* DELETE categorie */
+// Niet nodig, categorieën werden vooraf bepaald.
 
 /* RESET DATABASE */
 router.post('/API/reset_db', (req, res, next) => {
