@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <div class="input-group">
-      <input type="text" (keyup.enter)="onSubmit()" [ngClass]='{"is-invalid": !!reactie.get("boodschap").errors && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)}'
+      <input type="text" [ngClass]='{"is-invalid": !!reactie.get("boodschap").errors && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)}'
         class="form-control" formControlName='boodschap' name='boodschap' placeholder="Reactie" id="reageren" required>
       <div class="input-group-append">
         <button [disabled]="!reactie.valid" class="btn btn-primary" type="submit">
