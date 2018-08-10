@@ -8,7 +8,7 @@ let UserSchema = new mongoose.Schema({
   salt: String,
   firstName: String,
   lastName: String,
-  email: { type: String, lawercase: true },
+  email: { type: String, lowercase: true },
   regio: { type: mongoose.Schema.Types.ObjectId, ref: 'Regio' }
 });
 
