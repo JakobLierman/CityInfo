@@ -1,3 +1,9 @@
+<div class="container">
+  <div class="row mb-4">
+    <app-back-button></app-back-button>
+  </div>
+</div>
+
 <form [formGroup]='bericht' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
   <h2>Bericht toevoegen</h2>
 
@@ -21,7 +27,7 @@
 
   <div class="form-group">
     <select [ngClass]='{"is-invalid": !!bericht.get("categorie").errors && (bericht.get("categorie").touched || bericht.get("categorie").dirty)}'
-      class="form-control" id="categorie" formControlName='categorie' minlength="25" required>
+      class="form-control" id="categorie" formControlName='categorie' required>
       <option option disabled selected value>Kies een categorie</option>
       <option *ngFor='let cat of categorieen' value="{{ cat.id }}">{{ cat.naam }}</option>
     </select>
@@ -52,7 +58,5 @@
     <strong>Probeer nog eens!</strong> Je hebt nog geen categorie geselecteerd.
   </div>
 
-  [disabled]="!bericht.valid"
-
-  <button type="submit" class="btn btn-primary">Bericht plaatsen</button>
+  <button [disabled]="!bericht.valid" type="submit" class="btn btn-primary">Bericht plaatsen</button>
 </form>

@@ -14,7 +14,7 @@ export class BerichtComponent implements OnInit {
 
   ngOnInit() {}
 
-  removeBericht() {
+  verwijderBericht() {
     this.deleteBericht.emit(this.bericht);
   }
 }

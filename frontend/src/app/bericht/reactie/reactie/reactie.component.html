@@ -7,7 +7,7 @@
         <span class="text-muted ml-auto">{{ reactie.dateAdded | date: 'd/M/yy, h:mm' }}</span>
       </p>
       <p class="font-weight-light">{{ reactie.boodschap }}</p>
-      <a *ngIf='true' class="btn btn-danger btn-sm text-white">
+      <a *ngIf='true' class="btn btn-danger btn-sm text-white" (click)='verwijderReactie()'>
         <!-- IF AUTHOR === USER -->
         <i class="fas fa-trash"></i> Verwijderen
       </a>

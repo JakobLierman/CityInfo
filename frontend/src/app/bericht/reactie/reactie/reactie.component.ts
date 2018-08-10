@@ -15,7 +15,7 @@ export class ReactieComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeReactie() {
+  verwijderReactie() {
     this.deleteReactie.emit(this.reactie);
   }
 }

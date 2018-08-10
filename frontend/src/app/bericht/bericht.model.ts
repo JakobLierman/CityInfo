@@ -72,7 +72,6 @@ export class Bericht {
       categorie: this._categorie,
       user: this._user, // currentUser?
       created: this._dateAdded
-      // reacties: this._reacties.map(rea => rea.toJSON())
     };
   }
 
@@ -110,5 +109,10 @@ export class Bericht {
 
   reactieToevoegen(reactie: Reactie) {
     this._reacties.push(reactie);
+  }
+
+  reactieVerwijderen(reactie: Reactie) {
+    const index = this._reacties.indexOf(reactie);
+    this._reacties.splice(index, 1);
   }
 }
