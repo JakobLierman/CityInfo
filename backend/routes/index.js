@@ -8,7 +8,7 @@ let Regio = mongoose.model('Regio');
 let User = mongoose.model('User');
 let jwt = require('express-jwt');
 
-// let auth = jwt({ secret: process.env.CITYINFO_BACKEND_SECRET });
+let auth = jwt({secret: process.env.CITYINFO_BACKEND_SECRET});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -16,8 +16,7 @@ router.get('/', function (req, res, next) {
 });
 
 /* GET berichten */
-router.get('/API/berichten', function(req, res, next) {
-  // auth toevoegen
+router.get('/API/berichten', auth, function (req, res, next) {
   let query = Bericht.find()
     .populate('reacties')
     .populate('categorie')
@@ -29,8 +28,7 @@ router.get('/API/berichten', function(req, res, next) {
 });
 
 /* POST bericht */
-router.post('/API/berichten/', function(req, res, next) {
-  // auth toevoegen
+router.post('/API/berichten/', auth, function (req, res, next) {
   let bericht = new Bericht({
     titel: req.body.titel,
     boodschap: req.body.boodschap,
@@ -58,12 +56,12 @@ router.param('bericht', function (req, res, next, id) {
 });
 
 /* GET één bericht */
-router.get('/API/bericht/:bericht', function(req, res, next) {
+router.get('/API/bericht/:bericht', auth, function (req, res, next) {
   res.json(req.bericht);
 });
 
 /* DELETE bericht */
-router.delete('/API/bericht/:bericht', function(req, res) {
+router.delete('/API/bericht/:bericht', auth, function (req, res) {
   // auth toevoegen
   Reactie.remove({_id: {$re: req.bericht.reacties}}, function (err) {
     if (err) return next(err);
@@ -75,7 +73,7 @@ router.delete('/API/bericht/:bericht', function(req, res) {
 });
 
 /* GET reacties van bericht */
-router.get('/API/bericht/:bericht/reacties', function(req, res, next) {
+router.get('/API/bericht/:bericht/reacties', auth, function (req, res, next) {
   // auth toevoegen
   Reactie.find(function (err, reacties) {
     if (err) return next(err);
@@ -84,7 +82,7 @@ router.get('/API/bericht/:bericht/reacties', function(req, res, next) {
 });
 
 /* POST reactie op bericht */
-router.post('/API/bericht/:bericht/reacties', function(req, res, next) {
+router.post('/API/bericht/:bericht/reacties', auth, function (req, res, next) {
   // auth toevoegen
   let reactie = new Reactie(req.body);
   reactie.save(function (err, reactie) {
@@ -108,7 +106,7 @@ router.param('reactie', function (req, res, next, id) {
 });
 
 /* DELETE één reactie */
-router.delete('/API/bericht/:bericht/reactie/:reactie', function(req, res) {
+router.delete('/API/bericht/:bericht/reactie/:reactie', auth, function (req, res) {
   // auth toevoegen
   req.reactie.remove(function (err) {
     if (err) return next(err);
@@ -117,8 +115,8 @@ router.delete('/API/bericht/:bericht/reactie/:reactie', function(req, res) {
 });
 
 /* GET alle categorieen */
-router.get('/API/categorieen', function(req, res, next) {
-  Categorie.find(function(err, categorieen) {
+router.get('/API/categorieen', auth, function (req, res, next) {
+  Categorie.find(function (err, categorieen) {
     if (err) return next(err);
     res.json(categorieen);
   });
@@ -136,6 +134,26 @@ router.post('/API/categorieen', function (req, res, next) {
 /* DELETE categorie */
 // Niet nodig, categorieën werden vooraf bepaald.
 
+/* GET Regios */
+router.get('/API/regios', function (req, res, next) {
+  Regio.find(function (err, regios) {
+    if (err) return next(err);
+    res.json(regios);
+  });
+});
+
+/* POST Regio */
+router.post('/API/regios', function (req, res, next) {
+  let regio = new Regio({naam: req.body.naam});
+  regio.save(function (err, rec) {
+    if (err) return next(err);
+    res.json(rec);
+  });
+});
+
+/* DELETE Regio */
+// Niet nodig, regio's werden vooraf bepaald.
+
 /* RESET DATABASE */
 router.post('/API/reset_db', (req, res, next) => {
   Bericht.find({}, (err, berichten) => {
@@ -147,9 +165,9 @@ router.post('/API/reset_db', (req, res, next) => {
   /*   Categorie.find({}, (err, categorieen) => {
     categorieen.forEach(categorie => categorie.remove());
   }); */
-  Regio.find({}, (err, regios) => {
+  /*Regio.find({}, (err, regios) => {
     regios.forEach(regio => regio.remove());
-  });
+  });*/
   User.find({}, (err, users) => {
     users.forEach(user => user.remove());
   });
