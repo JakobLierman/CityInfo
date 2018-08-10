@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { basehttpInterceptorProviders, httpInterceptorProviders } from './../http-interceptors/index';
-import { NavigationModule } from './../navigation/navigation.module';
+import { SharedModule } from '../shared/shared.module';
 import { BerichtDataService } from './bericht-data.service';
 import { BerichtDetailComponent } from './bericht-detail/bericht-detail.component';
 import { BerichtFilterPipe } from './bericht-filter.pipe';
@@ -37,7 +37,7 @@ const routes = [
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
-    NavigationModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   providers: [
