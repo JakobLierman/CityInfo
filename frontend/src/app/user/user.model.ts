@@ -37,6 +37,12 @@ export class User {
     this._regio = regio;
   }
 
+  static fromJSON(json: any): User {
+    const rec = new User(json.username, json.voornaam, json.familienaam, json.email, json.regio.map(Regio.fromJSON));
+    rec._id = json._id;
+    return rec;
+  }
+
   get id(): number {
     return this._id;
   }
