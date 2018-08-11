@@ -1,66 +1,83 @@
-<h2>Registreren</h2>
-
 <div *ngIf='errorMsg' class="alert alert-danger">{{errorMsg}}</div>
 
-<form [formGroup]='user' class="col-xl-6 col-md-8 col-sm-12">
-  <!--(ngSubmit)='onSubmit()'>-->
+<form [formGroup]='user' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
+  <h2>Registreren</h2>
   <div class="form-row">
     <div class="col">
+
       <div class="form-group">
-        <label for="firstname">Voornaam</label>
-        <input type="text" class="form-control" id="firstname" formControlName='firstname' placeholder="Jan" required>
-        <!-- Check ??? -->
+        <label for="voornaam">Voornaam</label>
+        <input
+          [ngClass]='{"is-invalid": !!user.get("voornaam").errors && (user.get("voornaam").touched || user.get("voornaam").dirty)}'
+          type="text" class="form-control" id="voornaam" formControlName='voornaam' placeholder="Jan" required>
+        <div class="invalid-feedback">Hey, jij daar! Hoe heet je nu ook weer?</div>
       </div>
     </div>
+
     <div class="col">
       <div class="form-group">
-        <label for="lastname">Familienaam</label>
-        <input type="text" class="form-control" id="lastname" formControlName='lastname' placeholder="Janssen" required>
-        <!-- Check ??? -->
+        <label for="familienaam">Familienaam</label>
+        <input
+          [ngClass]='{"is-invalid": !!user.get("familienaam").errors && (user.get("familienaam").touched || user.get("familienaam").dirty)}'
+          type="text" class="form-control" id="familienaam" formControlName='familienaam' placeholder="Janssen"
+          required>
+        <div class="invalid-feedback">Laten we formeel doen, mag ik je familienaam ook weten?</div>
       </div>
     </div>
   </div>
+
   <div class="form-group">
     <label for="username">Gebruikersnaam:</label>
-    <input type="text" class="form-control" id="username" formControlName='username' placeholder="CityNinja9000" required>
-    <!--
-    <div class="alert alert-danger alert-dismissable fade show" *ngIf='user.get("username").errors?.userAlreadyExists && user.get("username").touched'>
-      <strong>Oh nee!</strong> Gebruikersnaam is al bezet.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <input
+      [ngClass]='{"is-invalid": !!user.get("username").errors && (user.get("username").touched || user.get("username").dirty)}'
+      type="text" class="form-control" id="username" formControlName='username' placeholder="CityNinja9000" required>
+    <div *ngIf="!!user.get('username').errors?.required" class="invalid-feedback">Oeps... Vul een gebruikersnaam in van
+      minstens 4 tekens.
     </div>
-    -->
+    <div *ngIf="!!user.get('username').errors?.userAlreadyExists" class="invalid-feedback">Gebruikersnaam is al bezet.
+    </div>
   </div>
+
   <div class="form-group">
     <label for="email">E-mail:</label>
-    <input type="email" class="form-control" id="email" formControlName='email' placeholder="naam@voorbeeld.com" required>
-    <!-- Check voor geldig email -->
+    <input
+      [ngClass]='{"is-invalid": !!user.get("email").errors && (user.get("email").touched || user.get("email").dirty)}'
+      email="true" type="email" class="form-control" id="email" formControlName='email' placeholder="naam@voorbeeld.com"
+      required>
+    <div class="invalid-feedback">Hierop kan ik je toch niet bereiken?</div>
   </div>
+
   <div formGroupName='passwordGroup'>
     <div class="form-group">
       <label for="password">Wachtwoord:</label>
-      <input type="password" class="form-control" id="password" formControlName='password' placeholder="Kies een wachtwoord" required>
-      <small id="passwordHelpBlock" class="form-text text-muted">Wachtwoord moet minstens X karakters lang zijn.</small>
-      <!-- Regels voor wachtwoord aanpassen -->
-      <!-- Check voor geldig wachtwoord -->
+      <input
+        [ngClass]='{"is-invalid": !!passwordControl.errors && (passwordControl.touched || passwordControl.dirty)}'
+        type="password" class="form-control" id="password" formControlName='password' placeholder="Kies een wachtwoord"
+        required>
+      <small id="passwordHelpBlock" class="form-text text-muted">Wachtwoord moet minstens 8 karakters lang zijn.</small>
+      <div class="invalid-feedback">Dit wachtwoord is niet veilig genoeg.</div>
     </div>
     <div class="form-group">
-      <label for="confirmpassword">Herhaal wachtwoord:</label>
-      <input type="password" class="form-control" id="confirmpassword" formControlName='confirmPassword' placeholder="Herhaal wachtwoord"
+      <label for="confirmPassword">Herhaal wachtwoord:</label>
+      <input
+        [ngClass]='{"is-invalid": (!!user.get("passwordGroup").get("confirmPassword").errors || user.get("passwordGroup").errors?.passwordsDiffer) && (user.get("passwordGroup").get("confirmPassword").touched || user.get("passwordGroup").get("confirmPassword").dirty)}'
+        type="password" class="form-control" id="confirmPassword" formControlName='confirmPassword'
+        placeholder="Herhaal wachtwoord"
         required>
-      <!-- Check indien wachtwoorden overeen komen -->
+      <div class="invalid-feedback">Wachtwoorden komen niet overeen.</div>
     </div>
   </div>
+
   <div class="form-group">
     <label for="regio">Regio:</label>
-    <select id="regio" class="form-control" required>
-      <!-- Opties dynamisch laten verschijnen -->
-      <option value="gent">Gent</option>
-      <option value="brussel">Brussel</option>
-      <option value="antwerpen">Antwerpen</option>
+    <select
+      [ngClass]='{"is-invalid": !!user.get("regio").errors && (user.get("regio").touched || user.get("regio").dirty)}'
+      id="regio" class="form-control" formControlName='regio' required>
+      <option disabled selected value>Kies jouw regio</option>
+      <option *ngFor='let reg of regios' value="{{ reg.id }}">{{ reg.naam }}</option>
     </select>
+    <div class="invalid-feedback">Van waar ben je? Je moet nog een regio kiezen.</div>
   </div>
+
   <button type="submit" [disabled]='!user.valid' class="btn btn-primary">Bevestig</button>
-  <!-- Button enkel beschikbaar als alle velden ingevuld zijn -->
 </form>
