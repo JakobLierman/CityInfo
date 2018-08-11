@@ -16,6 +16,20 @@ router.get("/", function(req, res, next) {
   });
 });
 
+router.param("user", function(req, res, next, id) {
+  let query = User.findById(id).populate("regio");
+  query.exec(function(err, user) {
+    if (err) return next(err);
+    if (!user) return next(new Error("not found " + id));
+    req.user = user;
+    return next();
+  });
+});
+
+router.get("/:user", function(req, res, next) {
+  res.json(req.user);
+});
+
 router.post("/register", function(req, res, next) {
   if (
     !req.body.username ||
