@@ -40,10 +40,9 @@ const routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    basehttpInterceptorProviders,
-    httpInterceptorProviders,
     BerichtDataService,
     BerichtResolver
   ]
 })
-export class BerichtModule { }
+export class BerichtModule {
+}
