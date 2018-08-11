@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import {Regio} from "./user.model";
+import {Regio, User} from "./user.model";
 import {map} from "rxjs/operators";
 
 @Injectable()
@@ -9,6 +9,17 @@ export class UserDataService {
   private readonly _appUrl = "/API";
 
   constructor(private http: HttpClient) {
+  }
+
+  // Users
+  get users(): Observable<User[]> {
+    return this.http
+      .get(`${this._appUrl}/users/`)
+      .pipe(map((list: any[]): User[] => list.map(User.fromJSON)));
+  }
+
+  getUserById(id: String): Observable<User> {
+    return this.http.get(`${this._appUrl}/users/${id}`).pipe(map(User.fromJSON));
   }
 
   // Regio's
