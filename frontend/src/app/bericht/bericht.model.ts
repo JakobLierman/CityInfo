@@ -1,5 +1,5 @@
-import { User } from './../user/user.model';
-import { Reactie } from './reactie/reactie.model';
+import {User} from './../user/user.model';
+import {Reactie} from './reactie/reactie.model';
 
 export class Categorie {
   private _id: number;

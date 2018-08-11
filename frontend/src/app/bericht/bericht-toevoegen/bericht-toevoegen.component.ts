@@ -1,8 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Bericht, Categorie } from '../bericht.model';
-import { BerichtDataService } from './../bericht-data.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Bericht, Categorie} from '../bericht.model';
+import {BerichtDataService} from './../bericht-data.service';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,8 +19,10 @@ export class BerichtToevoegenComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _berichtDataService: BerichtDataService
-  ) {}
+    private _berichtDataService: BerichtDataService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit() {
     this._berichtDataService.categorieen.subscribe(
@@ -27,7 +30,7 @@ export class BerichtToevoegenComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } bij het ophalen van de categorieën: ${error.error}`;
+          } bij het ophalen van de categorieën: ${error.error}`;
       }
     );
     this.bericht = this.fb.group({
@@ -50,12 +53,12 @@ export class BerichtToevoegenComponent implements OnInit {
 
     this._berichtDataService.berichtToevoegen(bericht).subscribe(
       () => {
-        this.bericht.reset();
+        this.router.navigate(['bericht/lijst']);
       },
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} bij het toevoegen van bericht met titel "${
           bericht.titel
-        }": ${error.error}`;
+          }": ${error.error}`;
       }
     );
   }
