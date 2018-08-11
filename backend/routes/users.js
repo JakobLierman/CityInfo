@@ -1,8 +1,8 @@
-var express = require("express");
-var router = express.Router();
-let passport = require("passport");
+let express = require("express");
+let router = express.Router();
 let mongoose = require("mongoose");
 let User = mongoose.model("User");
+let passport = require("passport");
 let jwt = require("express-jwt");
 
 let auth = jwt({ secret: process.env.CITYINFO_BACKEND_SECRET });
@@ -26,7 +26,7 @@ router.param("user", function(req, res, next, id) {
   });
 });
 
-router.get("/:user", function(req, res, next) {
+router.get("/:user", auth, function(req, res, next) {
   res.json(req.user);
 });
 
