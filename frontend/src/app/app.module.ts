@@ -20,11 +20,11 @@ registerLocaleData(localeNl, "nl-BE");
 @NgModule({
   declarations: [AppComponent, HomeComponent, PaginaNietGevondenComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     UserModule,
     SharedModule,
     AppRoutingModule,
-    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [

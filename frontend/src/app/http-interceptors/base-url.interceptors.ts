@@ -1,16 +1,13 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest
-} from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import { Injectable } from "@angular/core";
-import { BACKEND_URL } from "../../environments/environment";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import {Injectable} from "@angular/core";
+import {BACKEND_URL} from "../../environments/environment";
 
 @Injectable()
 export class BaseUrlInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor() {
+  }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

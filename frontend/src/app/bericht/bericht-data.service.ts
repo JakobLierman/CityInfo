@@ -1,15 +1,16 @@
-import { Reactie } from './reactie/reactie.model';
-import { map } from 'rxjs/operators';
-import { Bericht, Categorie } from './bericht.model';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import {HttpClient} from '@angular/common/http';
+import {Reactie} from './reactie/reactie.model';
+import {map} from 'rxjs/operators';
+import {Bericht, Categorie} from './bericht.model';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class BerichtDataService {
   private readonly _appUrl = '/API';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   // Berichten
   get berichten(): Observable<Bericht[]> {
@@ -40,7 +41,7 @@ export class BerichtDataService {
   getReactiesVanBericht(ber: Bericht): Observable<Reactie[]> {
     const url = `${this._appUrl}/bericht/${ber.id}/reacties`;
     return this.http.get(url)
-    .pipe(map((list: any[]): Reactie[] => list.map(Reactie.fromJSON)));
+      .pipe(map((list: any[]): Reactie[] => list.map(Reactie.fromJSON)));
   }
 
   voegReactieToeAanBericht(rea: Reactie, ber: Bericht): Observable<Reactie> {
