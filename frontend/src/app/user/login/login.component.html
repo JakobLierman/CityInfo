@@ -1,20 +1,29 @@
-<h2>Aanmelden</h2>
-
 <div *ngIf='errorMsg' class="alert alert-danger">{{errorMsg}}</div>
 
 <form [formGroup]='user' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
+  <h2>Aanmelden</h2>
+
   <div class="form-group">
     <label for="username">Gebruikersnaam:</label>
-    <input type="text" class="form-control" id="username" formControlName='username' placeholder="Gebruikersnaam" required>
-    <!-- Check indien geldig ??? -->
+    <input
+      [ngClass]='{"is-invalid": !!user.get("username").errors && (user.get("username").touched || user.get("username").dirty)}'
+      type="text" class="form-control" id="username" formControlName='username' placeholder="Gebruikersnaam" required>
+    <div class="invalid-feedback">Oeps... Vul een gebruikersnaam in.
+    </div>
   </div>
+
   <div class="form-group">
     <label for="password">Wachtwoord:</label>
-    <input type="password" class="form-control" id="password" formControlName='password' placeholder="Wachtwoord" required>
-    <!-- Check voor geldig email -->
+    <input type="password" class="form-control" id="password" formControlName='password' placeholder="Wachtwoord"
+           required>
+    <div class="invalid-feedback">Gebruikersnaam en wachtwoord komen niet overeen.</div>
   </div>
+
   <button type='submit' [disabled]='!user.valid' class="btn btn-primary" id='loginbtn'>Meld aan</button>
 </form>
-<p>Nog geen account?
-  <a href="" routerLink="/registreer">Registreer je hier!</a>
-</p>
+
+<div class="container mt-2">
+  <p>Nog geen account?
+    <a routerLink="/registreer">Registreer je hier!</a>
+  </p>
+</div>

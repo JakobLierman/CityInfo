@@ -1,20 +1,14 @@
-import { AuthenticationService } from '../authentication.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import {AuthenticationService} from '../authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {HttpErrorResponse} from '@angular/common/http';
 
 function passwordValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
     console.log(control.value);
     return control.value.length < 12
-      ? { passwordTooShort: { value: control.value.length } }
+      ? {passwordTooShort: {value: control.value.length}}
       : null;
   };
 }
@@ -32,7 +26,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.user = this.fb.group({
@@ -51,7 +46,7 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl(this.authService.redirectUrl);
               this.authService.redirectUrl = undefined;
             } else {
-              this.router.navigate(['/bericht/lijst']);
+              this.router.navigate(['/home']);
             }
           } else {
             this.errorMsg = `Could not login`;
@@ -61,11 +56,11 @@ export class LoginComponent implements OnInit {
           if (err.error instanceof Error) {
             this.errorMsg = `Error while trying to login user ${
               this.user.value.username
-            }: ${err.error.message}`;
+              }: ${err.error.message}`;
           } else {
             this.errorMsg = `Error ${err.status} while trying to login user ${
               this.user.value.username
-            }: ${err.error}`;
+              }: ${err.error}`;
           }
         }
       );
