@@ -1,7 +1,12 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {Injectable} from '@angular/core';
-import {BACKEND_URL} from '../../environments/environment';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import { Injectable } from "@angular/core";
+import { BACKEND_URL } from "../../environments/environment";
 
 @Injectable()
 export class BaseUrlInterceptor implements HttpInterceptor {
@@ -15,7 +20,7 @@ export class BaseUrlInterceptor implements HttpInterceptor {
       req = req.clone({
         url: `${BACKEND_URL}${req.url}`
       });
-      console.log('set to ', `${BACKEND_URL}${req.url}`);
+      console.log("set to ", `${BACKEND_URL}${req.url}`);
     }
     return next.handle(req);
   }
