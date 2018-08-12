@@ -2,8 +2,7 @@
   <div class="row">
     <h1 class="display-1">CityInfo</h1>
   </div>
-  <div>
-    <!-- ALS GEBRUIKER NIET INGELOGD IS -->
+  <div *ngIf="!currentUser">
     <div class="row">
       <h1>Welkom</h1>
     </div>
@@ -18,44 +17,43 @@
     </div>
   </div>
 
-  <div>
+  <div *ngIf="currentUser">
     <div class="row">
-      <h1>Welkom, (( user.voornaam ))</h1>
+      <h1>Welkom, {{ currentUser?.voornaam }}</h1>
     </div>
     <div class="row">
       <p>Welkom terug op CityInfo!
         <br>Ga snel naar
-        <a routerLink="/bericht/lijst">het overzicht</a> voor alle nieuwtjes uit (( user.regio.naam )).</p>
+        <a routerLink="/bericht/lijst">het overzicht</a> voor alle nieuwtjes uit {{ currentUser?.regio.naam }}.</p>
     </div>
-    <!-- ALS GEBRUIKER INGELOGD IS -->
     <div class="row mt-4">
       <h3>Huidige gebruiker</h3>
     </div>
-    <div class="row">
+    <div class="row mt-1 mb-2">
       <table>
         <tr>
           <td>
-            <strong>Naam: </strong>
+            <strong>Naam:</strong>
           </td>
-          <td>(( user.naam ))</td>
+          <td>{{ currentUser?.naam }}</td>
         </tr>
         <tr>
           <td>
-            <strong>Gebruikersnaam: </strong>
+            <strong>Gebruikersnaam:</strong>
           </td>
-          <td>(( user.username ))</td>
+          <td>{{ currentUser?.username }}</td>
         </tr>
         <tr>
           <td>
-            <strong>E-mail: </strong>
+            <strong>E-mail:</strong>
           </td>
-          <td>(( user.email ))</td>
+          <td><a href="mailto:{{ currentUser?.email }}?SUBJECT=CityInfo">{{ currentUser?.email }}</a></td>
         </tr>
         <tr>
           <td>
-            <strong>Regio: </strong>
+            <strong>Regio:</strong>
           </td>
-          <td>(( user.regio.naam ))</td>
+          <td>{{ currentUser?.regio.naam }}</td>
         </tr>
       </table>
     </div>

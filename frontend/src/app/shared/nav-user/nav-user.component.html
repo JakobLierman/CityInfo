@@ -1,7 +1,9 @@
 <div *ngIf="!currentUser">
-  <button class="btn btn-sm btn-outline-primary" type="button">Registreren</button>
-  <button class="btn btn-sm btn-outline-secondary ml-1" type="button">Aanmelden</button>
+  <a class="btn btn-sm btn-outline-primary ml-1" routerLink="/registreer">Registreren</a>
+  <a class="btn btn-sm btn-outline-secondary ml-1" routerLink="/aanmelden">Aanmelden</a>
 </div>
 <div *ngIf="currentUser">
-  <button class="btn btn-sm btn-outline-secondary" type="button">Afmelden</button>
+  <i class="mr-2">Hallo, {{ currentUser.naam }}!</i>
+  <a class="btn btn-sm btn-outline-primary ml-1 d-none" routerLink="/gebruiker/wijzigen">Gegevens wijzigen</a>
+  <a class="btn btn-sm btn-outline-secondary ml-1" routerLink="/afmelden">Afmelden</a>
 </div>
