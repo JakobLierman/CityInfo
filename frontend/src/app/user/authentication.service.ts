@@ -1,8 +1,10 @@
-import { Observable } from 'rxjs/Observable';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {Regio, User} from "./user.model";
+import {UserDataService} from "./user-data.service";
 
 function parseJwt(token) {
   if (!token) {
@@ -21,7 +23,7 @@ export class AuthenticationService {
 
   public redirectUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _userDataService: UserDataService) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
     if (parsedToken) {
       const expires =
@@ -36,6 +38,10 @@ export class AuthenticationService {
     );
   }
 
+  get currentUser(): Observable<User> {
+    return this._userDataService.getUserById(parseJwt(this.token)._id);
+  }
+
   get user$(): BehaviorSubject<string> {
     return this._user$;
   }
@@ -46,7 +52,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post(`${this._url}/login`, { username, password }).pipe(
+    return this.http.post(`${this._url}/login`, {username, password}).pipe(
       map((res: any) => {
         const token = res.token;
         if (token) {
@@ -67,8 +73,8 @@ export class AuthenticationService {
     }
   }
 
-  register(username: string, password: string): Observable<boolean> {
-    return this.http.post(`${this._url}/register`, { username, password }).pipe(
+  register(username: string, password: string, voornaam: string, familienaam: string, email: string, regio: Regio): Observable<boolean> {
+    return this.http.post(`${this._url}/register`, {username, password, voornaam, familienaam, email, regio}).pipe(
       map((res: any) => {
         const token = res.token;
         if (token) {
@@ -83,7 +89,7 @@ export class AuthenticationService {
   }
 
   checkUserNameAvailability(username: string): Observable<boolean> {
-    return this.http.post(`${this._url}/checkusername`, { username }).pipe(
+    return this.http.post(`${this._url}/checkusername`, {username}).pipe(
       map((item: any) => {
         if (item.username === 'alreadyexists') {
           return false;
