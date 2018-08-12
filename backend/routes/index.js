@@ -122,7 +122,7 @@ router.get("/API/categorieen", auth, function(req, res, next) {
 });
 
 /* POST Categorie */
-router.post("/API/categorieen", function(req, res, next) {
+router.post("/API/categorieen", auth, function(req, res, next) {
   let categorie = new Categorie({ naam: req.body.naam, graad: req.body.graad });
   categorie.save(function(err, rec) {
     if (err) return next(err);
@@ -142,7 +142,7 @@ router.get("/API/regios", function(req, res, next) {
 });
 
 /* POST Regio */
-router.post("/API/regios", function(req, res, next) {
+router.post("/API/regios", auth, function(req, res, next) {
   let regio = new Regio({ naam: req.body.naam });
   regio.save(function(err, rec) {
     if (err) return next(err);
@@ -154,7 +154,7 @@ router.post("/API/regios", function(req, res, next) {
 // Niet nodig, regio's werden vooraf bepaald.
 
 /* RESET DATABASE */
-router.post("/API/reset_db", (req, res, next) => {
+router.post("/API/reset_db", auth, (req, res, next) => {
   Bericht.find({}, (err, berichten) => {
     berichten.forEach(bericht => bericht.remove());
   });

@@ -8,7 +8,7 @@ let jwt = require("express-jwt");
 let auth = jwt({ secret: process.env.CITYINFO_BACKEND_SECRET });
 
 /* GET users listing. */
-router.get("/", function(req, res, next) {
+router.get("/", auth, function(req, res, next) {
   let query = User.find().populate("regio");
   query.exec(function(err, users) {
     if (err) return next(err);
