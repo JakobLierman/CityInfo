@@ -22,6 +22,7 @@ export class BaseUrlInterceptor implements HttpInterceptor {
       });
       console.log("set to ", `${BACKEND_URL}${req.url}`);
     }
+    console.log("reached prod interceptor");
     return next.handle(req);
   }
 }

@@ -24,16 +24,8 @@ const routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    LogoutComponent],
-  providers: [
-    basehttpInterceptorProviders,
-    AuthenticationService,
-    AuthGuardService,
-    UserDataService
-  ],
+  declarations: [LoginComponent, RegisterComponent, LogoutComponent],
+  providers: [AuthenticationService, AuthGuardService, UserDataService],
   exports: []
 })
 export class UserModule {}

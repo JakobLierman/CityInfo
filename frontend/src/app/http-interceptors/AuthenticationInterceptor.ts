@@ -23,6 +23,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
           `Bearer ${this.authService.token}`
         )
       });
+      console.log("reached local interceptor");
       return next.handle(clonedRequest);
     }
     return next.handle(req);
