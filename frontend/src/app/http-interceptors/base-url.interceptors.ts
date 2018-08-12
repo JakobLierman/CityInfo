@@ -16,13 +16,10 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (BACKEND_URL) {
-      console.log("before ", `${req.url}`);
       req = req.clone({
         url: `${BACKEND_URL}${req.url}`
       });
-      console.log("after ", `${req.url}`);
     }
-    console.log("reached prod interceptor");
     return next.handle(req);
   }
 }
