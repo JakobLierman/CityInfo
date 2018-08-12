@@ -1,5 +1,5 @@
 export class Regio {
-  private _id: number;
+  private _id: string;
   private _naam: string;
 
   constructor(naam: string) {
@@ -12,7 +12,7 @@ export class Regio {
     return rec;
   }
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 
@@ -22,7 +22,7 @@ export class Regio {
 }
 
 export class User {
-  private _id: number;
+  private _id: string;
   private _username: string;
   private _voornaam: string;
   private _familienaam: string;
@@ -38,12 +38,18 @@ export class User {
   }
 
   static fromJSON(json: any): User {
-    const rec = new User(json.username, json.voornaam, json.familienaam, json.email, json.regio.map(Regio.fromJSON));
+    const rec = new User(
+      json.username,
+      json.voornaam,
+      json.familienaam,
+      json.email,
+      json.regio
+    );
     rec._id = json._id;
     return rec;
   }
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 

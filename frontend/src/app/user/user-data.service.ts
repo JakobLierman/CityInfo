@@ -19,7 +19,9 @@ export class UserDataService {
   }
 
   getUserById(id: String): Observable<User> {
-    return this.http.get(`${this._appUrl}/users/${id}`).pipe(map(User.fromJSON));
+    return this.http
+      .get(`${this._appUrl}/users/${id}`)
+      .pipe(map(User.fromJSON));
   }
 
   // Regio's

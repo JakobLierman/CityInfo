@@ -38,7 +38,10 @@ export class AuthenticationService {
     );
   }
 
-  get currentUser(): Observable<User> {
+  get currentUser$(): Observable<User> {
+    if (!this.token) {
+      return null;
+    }
     return this._userDataService.getUserById(parseJwt(this.token)._id);
   }
 

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../user/authentication.service";
 import {User} from "../../user/user.model";
-import {HttpErrorResponse} from "../../../../node_modules/@angular/common/http";
 
 @Component({
   selector: 'app-nav-user',
@@ -14,18 +13,15 @@ export class NavUserComponent implements OnInit {
 
   constructor(private _auth: AuthenticationService) { }
 
-  ngOnInit() {
-    this._auth.currentUser.subscribe(
-      item => (this._currentUser = item['user']),
-      (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${
-          error.status
-          } bij het ophalen van het user: ${error.error}`;
-      }
-    );
-  }
-
   get currentUser(): User {
     return this._currentUser;
+  }
+
+  ngOnInit() {
+    if (this._auth.token) {
+      this._auth.currentUser$.subscribe(
+        (user: User) => (this._currentUser = user)
+      );
+    }
   }
 }
