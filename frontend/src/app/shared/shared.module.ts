@@ -1,7 +1,8 @@
-import { BackButtonComponent } from './back-button/back-button.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DateSortPipe } from './date-sort.pipe';
+import {BackButtonComponent} from './back-button/back-button.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DateSortPipe} from './date-sort.pipe';
+import {NavUserComponent} from './nav-user/nav-user.component';
 
 @NgModule({
   imports: [
@@ -9,10 +10,13 @@ import { DateSortPipe } from './date-sort.pipe';
   ],
   declarations: [
     BackButtonComponent,
-    DateSortPipe
+    DateSortPipe,
+    NavUserComponent
   ],
   exports: [
-    BackButtonComponent
+    BackButtonComponent,
+    DateSortPipe,
+    NavUserComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,7 @@
+<div *ngIf="!currentUser">
+  <button class="btn btn-sm btn-outline-primary" type="button">Registreren</button>
+  <button class="btn btn-sm btn-outline-secondary ml-1" type="button">Aanmelden</button>
+</div>
+<div *ngIf="currentUser">
+  <button class="btn btn-sm btn-outline-secondary" type="button">Afmelden</button>
+</div>
