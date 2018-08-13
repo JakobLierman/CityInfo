@@ -12,6 +12,7 @@ import {AuthenticationService} from "../../user/authentication.service";
   styleUrls: ['./bericht-lijst.component.css']
 })
 export class BerichtLijstComponent implements OnInit {
+  p = 1;
   public filterBerichtTitel: string;
   public filterBericht$ = new Subject<string>();
   public errorMsg: string;
