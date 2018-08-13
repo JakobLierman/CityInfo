@@ -20,11 +20,10 @@ export class AuthenticationService {
   private readonly _tokenKey = "currentUser";
   private readonly _url = "/API/users";
   private _user$: BehaviorSubject<string>;
-
   public redirectUrl: string;
 
   constructor(
-    private _userDataService: UserDataService,
+    private userDataService: UserDataService,
     private http: HttpClient
   ) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
@@ -79,14 +78,7 @@ export class AuthenticationService {
     }
   }
 
-  register(
-    username: string,
-    password: string,
-    voornaam: string,
-    familienaam: string,
-    email: string,
-    regio: Regio
-  ): Observable<boolean> {
+  register(username: string, password: string, voornaam: string, familienaam: string, email: string, regio: Regio): Observable<boolean> {
     return this.http
       .post(`${this._url}/register`, {
         username,

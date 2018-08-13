@@ -1,11 +1,7 @@
 let mongoose = require('mongoose');
 
 let RegioSchema = new mongoose.Schema({
-    naam: String,
- /*   berichten: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bericht'
-    }]*/
+  naam: String
 });
 
 mongoose.model('Regio', RegioSchema);

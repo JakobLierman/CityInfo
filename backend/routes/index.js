@@ -160,7 +160,7 @@ router.param("regio", function (req, res, next, id) {
 
 /* Get één regio */
 router.get("/API/regio/:regio", auth, function (req, res, next) {
-  res.json(req.user);
+  res.json(req.regio);
 });
 
 /* DELETE Regio */

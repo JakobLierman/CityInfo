@@ -2,7 +2,7 @@
   <input (keyup)='filterBericht$.next($event.target.value)' type='text' class="form-control" id='filter' name='filter'
          placeholder='Zoeken op titel'>
 </div>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
+<div *ngIf="false" class="alert alert-success alert-dismissible fade show" role="alert">
   <!-- ALS ER EEN NIEUW BERICHT WERD GEPLAATST -->
   <strong>Gelukt!</strong> Het bericht werd succesvol toegevoegd.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -16,7 +16,7 @@
 </div>
 <div>
   <app-bericht *ngFor='let localBericht of berichten | berichtFilter:currentUser.regio:filterBerichtTitel |
-               paginate: {itemsPerPage: 10, currentPage: p}'
+               paginate: {itemsPerPage: 5, currentPage: p}'
                [bericht]='localBericht'></app-bericht>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>

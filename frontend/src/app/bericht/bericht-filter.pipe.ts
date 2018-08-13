@@ -12,6 +12,6 @@ export class BerichtFilterPipe implements PipeTransform {
     if ((!titel || titel.length === 0) && !regio) {
       return berichten;
     }
-    return berichten.filter(rec => rec.titel.toLowerCase().startsWith(titel.toLowerCase()));
+    return berichten.filter(ber => ber.titel.toLowerCase().startsWith(titel.toLowerCase()));
   }
 }

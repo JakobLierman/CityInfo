@@ -1,9 +1,9 @@
-import { BerichtDataService } from '../bericht-data.service';
-import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { HttpErrorResponse } from '@angular/common/http';
-import { distinctUntilChanged, debounceTime, map } from 'rxjs/operators';
-import { Bericht } from '../bericht.model';
+import {BerichtDataService} from '../bericht-data.service';
+import {Component, OnInit} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import {HttpErrorResponse} from '@angular/common/http';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {Bericht} from '../bericht.model';
 
 @Component({
   selector: 'app-bericht-lijst',
@@ -13,9 +13,7 @@ import { Bericht } from '../bericht.model';
 export class BerichtLijstComponent implements OnInit {
   public filterBerichtTitel: string;
   public filterBericht$ = new Subject<string>();
-
   public errorMsg: string;
-
   private _berichten: Bericht[];
 
   constructor(private _berichtDataService: BerichtDataService) {
@@ -29,12 +27,12 @@ export class BerichtLijstComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._berichtDataService.berichten.subscribe(
+    this.berichtDataService.berichten.subscribe(
       berichten => (this._berichten = berichten),
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } bij het ophalen van de berichten: ${error.error}`;
+          } bij het ophalen van de berichten: ${error.error}`;
       }
     );
   }
@@ -44,7 +42,7 @@ export class BerichtLijstComponent implements OnInit {
   }
 
   verwijderBericht(bericht: Bericht) {
-    this._berichtDataService.verwijderBericht(bericht).subscribe(
+    this.berichtDataService.verwijderBericht(bericht).subscribe(
       item => (this._berichten = this._berichten.filter(val => item.id !== val.id)),
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} bij het verwijderen van bericht met titel "${bericht.titel}": ${error.error}`;

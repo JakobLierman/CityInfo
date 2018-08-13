@@ -31,10 +31,10 @@ export class UserDataService {
       .pipe(map((list: any[]): Regio[] => list.map(Regio.fromJSON)));
   }
 
-  getRegioById(id: String): Observable<User> {
+  getRegioById(id: string): Observable<Regio> {
     return this.http
       .get(`${this._appUrl}/regio/${id}`)
-      .pipe(map(User.fromJSON));
+      .pipe(map(Regio.fromJSON));
   }
 
   regioToevoegen(regio: Regio): Observable<Regio> {
