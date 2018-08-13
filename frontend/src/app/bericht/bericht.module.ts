@@ -15,6 +15,7 @@ import {ReactieLijstComponent} from "./reactie/reactie-lijst/reactie-lijst.compo
 import {ReactieToevoegenComponent} from "./reactie/reactie-toevoegen/reactie-toevoegen.component";
 import {ReactieComponent} from "./reactie/reactie/reactie.component";
 import {basehttpInterceptorProviders, httpInterceptorProviders} from "../http-interceptors";
+import {NgxPaginationModule} from "ngx-pagination";
 
 const routes = [
   {path: "lijst", component: BerichtLijstComponent},
@@ -42,6 +43,7 @@ const routes = [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes)
   ],
   providers: [
