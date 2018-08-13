@@ -24,7 +24,7 @@
     <div class="row">
       <p>Welkom terug op CityInfo!
         <br>Ga snel naar
-        <a routerLink="/bericht/lijst">het overzicht</a> voor alle nieuwtjes uit {{ currentUser?.regio.naam }}.</p>
+        <a routerLink="/bericht/lijst">het overzicht</a> voor alle nieuwtjes uit {{ currentUser?.regio }}.</p>
     </div>
     <div class="row mt-4">
       <h3>Huidige gebruiker</h3>
@@ -53,7 +53,7 @@
           <td>
             <strong>Regio:</strong>
           </td>
-          <td>{{ currentUser?.regio.naam }}</td>
+          <td>{{ currentUser?.regio }}</td>
         </tr>
       </table>
     </div>

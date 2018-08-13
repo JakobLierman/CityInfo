@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {map} from "rxjs/operators";
-import {Regio, User} from "./user.model";
+import {User} from "./user.model";
 import {UserDataService} from "./user-data.service";
 
 function parseJwt(token) {
@@ -40,11 +40,20 @@ export class AuthenticationService {
     );
   }
 
-  get currentUser$(): Observable<User> {
+  get currentUser(): User {
     if (!this.token) {
       return null;
     }
-    return this._userDataService.getUserById(parseJwt(this.token)._id);
+    const fromLocalStorage = parseJwt(localStorage.getItem(this._tokenKey));
+    const user = new User(
+      fromLocalStorage.username,
+      fromLocalStorage.voornaam,
+      fromLocalStorage.familienaam,
+      fromLocalStorage.email,
+      fromLocalStorage.regio
+    );
+    user.id = fromLocalStorage._id;
+    return user;
   }
 
   get user$(): BehaviorSubject<string> {
@@ -78,7 +87,7 @@ export class AuthenticationService {
     }
   }
 
-  register(username: string, password: string, voornaam: string, familienaam: string, email: string, regio: Regio): Observable<boolean> {
+  register(username: string, password: string, voornaam: string, familienaam: string, email: string, regio: string): Observable<boolean> {
     return this.http
       .post(`${this._url}/register`, {
         username,

@@ -27,9 +27,9 @@ export class User {
   private _voornaam: string;
   private _familienaam: string;
   private _email: string;
-  private _regio: Regio;
+  private _regio: string;
 
-  constructor(username: string, voornaam: string, familienaam: string, email: string, regio: Regio) {
+  constructor(username: string, voornaam: string, familienaam: string, email: string, regio: string) {
     this._username = username;
     this._voornaam = voornaam;
     this._familienaam = familienaam;
@@ -51,6 +51,10 @@ export class User {
 
   get id(): string {
     return this._id;
+  }
+
+  set id(id: string) {
+    this._id = id;
   }
 
   get username(): string {
@@ -89,11 +93,11 @@ export class User {
     this._email = email;
   }
 
-  get regio(): Regio {
+  get regio(): string {
     return this._regio;
   }
 
-  set regio(regio: Regio) {
+  set regio(regio: string) {
     this._regio = regio;
   }
 }

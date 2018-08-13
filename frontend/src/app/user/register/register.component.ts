@@ -67,7 +67,9 @@ export class RegisterComponent implements OnInit {
   }
 
   get regios() {
-    return this._regios;
+    const regioArray: string[] = [];
+    this._regios.forEach(r => regioArray.push(r.naam));
+    return regioArray;
   }
 
   serverSideValidateUsername(): ValidatorFn {

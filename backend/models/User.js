@@ -9,7 +9,7 @@ let UserSchema = new mongoose.Schema({
   voornaam: String,
   familienaam: String,
   email: {type: String, lowercase: true},
-  regio: {type: mongoose.Schema.Types.ObjectId, ref: 'Regio'}
+  regio: String
 });
 
 UserSchema.methods.setPassword = function (password) {
@@ -34,6 +34,10 @@ UserSchema.methods.generateJWT = function () {
     {
       _id: this._id,
       username: this.username,
+      voornaam: this.voornaam,
+      familienaam: this.familienaam,
+      email: this.email,
+      regio: this.regio,
       exp: parseInt(exp.getTime() / 1000)
     },
     process.env.CITYINFO_BACKEND_SECRET

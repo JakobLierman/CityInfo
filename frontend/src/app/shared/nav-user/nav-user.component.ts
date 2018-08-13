@@ -9,19 +9,14 @@ import {User} from "../../user/user.model";
 })
 export class NavUserComponent implements OnInit {
   public errorMsg: string;
-  private _currentUser: User;
 
-  constructor(private _auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService) {
+  }
 
   get currentUser(): User {
-    return this._currentUser;
+    return this.auth.currentUser;
   }
 
   ngOnInit() {
-    if (this._auth.token) {
-      this._auth.currentUser$.subscribe(
-        (user: User) => (this._currentUser = user)
-      );
-    }
   }
 }

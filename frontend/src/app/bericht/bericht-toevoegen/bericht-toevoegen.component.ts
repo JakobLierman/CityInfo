@@ -17,7 +17,6 @@ export class BerichtToevoegenComponent implements OnInit {
   bericht: FormGroup;
   errorMsg: string;
   private _categorieen: Categorie[];
-  private _currentUser: User;
 
   constructor(
     private fb: FormBuilder,
@@ -41,11 +40,6 @@ export class BerichtToevoegenComponent implements OnInit {
       boodschap: ['', [Validators.required, Validators.minLength(25)]],
       categorie: ['', [Validators.required]]
     });
-    if (this.auth.token) {
-      this.auth.currentUser$.subscribe(
-        (user: User) => (this._currentUser = user)
-      );
-    }
   }
 
   get categorieen() {
@@ -53,7 +47,7 @@ export class BerichtToevoegenComponent implements OnInit {
   }
 
   get currentUser(): User {
-    return this._currentUser;
+    return this.auth.currentUser;
   }
 
   onSubmit() {
@@ -61,7 +55,7 @@ export class BerichtToevoegenComponent implements OnInit {
       this.bericht.value.titel,
       this.bericht.value.boodschap,
       this.bericht.value.categorie,
-      this._currentUser
+      this.currentUser
     );
 
     this._berichtDataService.berichtToevoegen(bericht).subscribe(

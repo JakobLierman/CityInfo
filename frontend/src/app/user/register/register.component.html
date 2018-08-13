@@ -74,7 +74,7 @@
       [ngClass]='{"is-invalid": !!user.get("regio").errors && (user.get("regio").touched || user.get("regio").dirty)}'
       id="regio" class="form-control" formControlName='regio' required>
       <option disabled selected value>Kies jouw regio</option>
-      <option *ngFor='let reg of regios' value="{{ reg.id }}">{{ reg.naam }}</option>
+      <option *ngFor='let reg of regios' value="{{ reg }}">{{ reg }}</option>
     </select>
     <div class="invalid-feedback">Van waar ben je? Je moet nog een regio kiezen.</div>
   </div>

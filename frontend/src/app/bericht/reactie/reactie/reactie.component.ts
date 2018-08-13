@@ -11,25 +11,19 @@ import {AuthenticationService} from "../../../user/authentication.service";
 export class ReactieComponent implements OnInit {
   @Input() public reactie: Reactie;
   @Output() public deleteReactie = new EventEmitter<Reactie>();
-  private _currentUser: User;
 
   constructor(private auth: AuthenticationService) {
   }
 
   ngOnInit() {
-    if (this.auth.token) {
-      this.auth.currentUser$.subscribe(
-        (user: User) => (this._currentUser = user)
-      );
-    }
   }
 
   get currentUser(): User {
-    return this._currentUser;
+    return this.auth.currentUser;
   }
 
   isMine() {
-    return this.reactie.user.username === this._currentUser.username;
+    return this.reactie.user.username === this.currentUser.username;
   }
 
   verwijderReactie() {

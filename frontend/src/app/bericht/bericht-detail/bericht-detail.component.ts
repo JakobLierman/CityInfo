@@ -13,7 +13,6 @@ import {AuthenticationService} from "../../user/authentication.service";
 export class BerichtDetailComponent implements OnInit {
   private _bericht: Bericht;
   public errorMsg: string;
-  private _currentUser: User;
 
   constructor(private route: ActivatedRoute, private auth: AuthenticationService) {
   }
@@ -23,7 +22,7 @@ export class BerichtDetailComponent implements OnInit {
   }
 
   get currentUser(): User {
-    return this._currentUser;
+    return this.auth.currentUser;
   }
 
   ngOnInit() {
@@ -35,14 +34,9 @@ export class BerichtDetailComponent implements OnInit {
           } bij het ophalen van het bericht: ${error.error}`;
       }
     );
-    if (this.auth.token) {
-      this.auth.currentUser$.subscribe(
-        (user: User) => (this._currentUser = user)
-      );
-    }
   }
 
   isMine() {
-    return this.bericht.user.username === this._currentUser.username;
+    return this.bericht.user.username === this.currentUser.username;
   }
 }

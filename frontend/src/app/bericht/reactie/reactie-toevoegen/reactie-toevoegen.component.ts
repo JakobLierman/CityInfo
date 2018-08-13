@@ -17,7 +17,6 @@ export class ReactieToevoegenComponent implements OnInit {
   private _bericht: Bericht;
   public errorMsg: string;
   reactie: FormGroup;
-  private _currentUser: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +31,7 @@ export class ReactieToevoegenComponent implements OnInit {
   }
 
   get currentUser(): User {
-    return this._currentUser;
+    return this.auth.currentUser;
   }
 
   ngOnInit() {
@@ -47,15 +46,10 @@ export class ReactieToevoegenComponent implements OnInit {
     this.reactie = this.fb.group({
       boodschap: ['', [Validators.required]]
     });
-    if (this.auth.token) {
-      this.auth.currentUser$.subscribe(
-        (user: User) => (this._currentUser = user)
-      );
-    }
   }
 
   onSubmit() {
-    const reactie = new Reactie(this.reactie.value.boodschap, this._currentUser);
+    const reactie = new Reactie(this.reactie.value.boodschap, this.currentUser);
     this.berichtDataService
       .voegReactieToeAanBericht(reactie, this._bericht)
       .subscribe(

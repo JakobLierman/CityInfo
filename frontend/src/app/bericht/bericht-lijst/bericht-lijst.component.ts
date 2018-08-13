@@ -4,6 +4,7 @@ import {Subject} from 'rxjs/Subject';
 import {HttpErrorResponse} from '@angular/common/http';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import {Bericht} from '../bericht.model';
+import {AuthenticationService} from "../../user/authentication.service";
 
 @Component({
   selector: 'app-bericht-lijst',
@@ -16,7 +17,10 @@ export class BerichtLijstComponent implements OnInit {
   public errorMsg: string;
   private _berichten: Bericht[];
 
-  constructor(private _berichtDataService: BerichtDataService) {
+  constructor(
+    private berichtDataService: BerichtDataService,
+    private auth: AuthenticationService
+  ) {
     this.filterBericht$
       .pipe(
         distinctUntilChanged(),
@@ -39,6 +43,10 @@ export class BerichtLijstComponent implements OnInit {
 
   get berichten() {
     return this._berichten;
+  }
+
+  get currentUser() {
+    return this.auth.currentUser;
   }
 
   verwijderBericht(bericht: Bericht) {

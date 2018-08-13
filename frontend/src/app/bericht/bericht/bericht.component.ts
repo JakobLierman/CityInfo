@@ -11,25 +11,19 @@ import {AuthenticationService} from "../../user/authentication.service";
 export class BerichtComponent implements OnInit {
   @Input() public bericht: Bericht;
   @Output() public deleteBericht = new EventEmitter<Bericht>();
-  private _currentUser: User;
 
-  constructor(private _auth: AuthenticationService) {
+  constructor(private auth: AuthenticationService) {
   }
 
   get currentUser(): User {
-    return this._currentUser;
+    return this.auth.currentUser;
   }
 
   ngOnInit() {
-    if (this._auth.token) {
-      this._auth.currentUser$.subscribe(
-        (user: User) => (this._currentUser = user)
-      );
-    }
   }
 
   isMine() {
-    return this.bericht.user.username === this._currentUser.username;
+    return this.bericht.user.username === this.currentUser.username;
   }
 
   verwijderBericht() {
