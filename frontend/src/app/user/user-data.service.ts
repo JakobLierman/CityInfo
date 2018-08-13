@@ -31,6 +31,12 @@ export class UserDataService {
       .pipe(map((list: any[]): Regio[] => list.map(Regio.fromJSON)));
   }
 
+  getRegioById(id: String): Observable<User> {
+    return this.http
+      .get(`${this._appUrl}/regio/${id}`)
+      .pipe(map(User.fromJSON));
+  }
+
   regioToevoegen(regio: Regio): Observable<Regio> {
     return this.http
       .post(`${this._appUrl}/regios/`, regio)

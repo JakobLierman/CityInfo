@@ -150,6 +150,21 @@ router.post("/API/regios", auth, function (req, res, next) {
   });
 });
 
+router.param("regio", function (req, res, next, id) {
+  let query = Regio.findById(id);
+  query.exec(function (err, user) {
+    if (err) return next(err);
+    if (!user) return next(new Error("not found " + id));
+    req.user = user;
+    return next();
+  });
+});
+
+/* Get één regio */
+router.get("/API/regio/:regio", auth, function (req, res, next) {
+  res.json(req.user);
+});
+
 /* DELETE Regio */
 // Niet nodig, regio's werden vooraf bepaald.
 
