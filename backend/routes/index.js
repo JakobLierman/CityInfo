@@ -8,27 +8,27 @@ let Regio = mongoose.model("Regio");
 let User = mongoose.model("User");
 let jwt = require("express-jwt");
 
-let auth = jwt({ secret: process.env.CITYINFO_BACKEND_SECRET });
+let auth = jwt({secret: process.env.CITYINFO_BACKEND_SECRET});
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
+router.get("/", function (req, res, next) {
   res.send("server works");
 });
 
 /* GET berichten */
-router.get("/API/berichten", auth, function(req, res, next) {
+router.get("/API/berichten", auth, function (req, res, next) {
   let query = Bericht.find()
     .populate("reacties")
     .populate("categorie")
     .populate("user");
-  query.exec(function(err, berichten) {
+  query.exec(function (err, berichten) {
     if (err) return next(err);
     res.json(berichten);
   });
 });
 
 /* POST bericht */
-router.post("/API/berichten/", auth, function(req, res, next) {
+router.post("/API/berichten/", auth, function (req, res, next) {
   let bericht = new Bericht({
     titel: req.body.titel,
     boodschap: req.body.boodschap,
@@ -36,18 +36,18 @@ router.post("/API/berichten/", auth, function(req, res, next) {
   });
   // bericht.user = req.user._id;
   bericht.reacties = [];
-  bericht.save(function(err, rec) {
+  bericht.save(function (err, rec) {
     if (err) return next(err);
     res.json(rec);
   });
 });
 
-router.param("bericht", function(req, res, next, id) {
+router.param("bericht", function (req, res, next, id) {
   let query = Bericht.findById(id)
     .populate("reacties")
     .populate("categorie")
     .populate("user");
-  query.exec(function(err, bericht) {
+  query.exec(function (err, bericht) {
     if (err) return next(err);
     if (!bericht) return next(new Error("not found " + id));
     req.bericht = bericht;
@@ -56,15 +56,15 @@ router.param("bericht", function(req, res, next, id) {
 });
 
 /* GET één bericht */
-router.get("/API/bericht/:bericht", auth, function(req, res, next) {
+router.get("/API/bericht/:bericht", auth, function (req, res, next) {
   res.json(req.bericht);
 });
 
 /* DELETE bericht */
-router.delete("/API/bericht/:bericht", auth, function(req, res) {
-  Reactie.remove({ _id: { $re: req.bericht.reacties } }, function(err) {
+router.delete("/API/bericht/:bericht", auth, function (req, res) {
+  Reactie.remove({_id: {$re: req.bericht.reacties}}, function (err) {
     if (err) return next(err);
-    req.bericht.remove(function(err) {
+    req.bericht.remove(function (err) {
       if (err) return next(err);
       res.json(req.bericht);
     });
@@ -72,29 +72,29 @@ router.delete("/API/bericht/:bericht", auth, function(req, res) {
 });
 
 /* GET reacties van bericht */
-router.get("/API/bericht/:bericht/reacties", auth, function(req, res, next) {
-  Reactie.find(function(err, reacties) {
+router.get("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
+  Reactie.find(function (err, reacties) {
     if (err) return next(err);
     res.json(reacties);
   });
 });
 
 /* POST reactie op bericht */
-router.post("/API/bericht/:bericht/reacties", auth, function(req, res, next) {
+router.post("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
   let reactie = new Reactie(req.body);
-  reactie.save(function(err, reactie) {
+  reactie.save(function (err, reactie) {
     if (err) return next(err);
     req.bericht.reacties.push(reactie);
-    req.bericht.save(function(err, rec) {
+    req.bericht.save(function (err, rec) {
       if (err) return next(err);
       res.json(reactie);
     });
   });
 });
 
-router.param("reactie", function(req, res, next, id) {
+router.param("reactie", function (req, res, next, id) {
   let query = Reactie.findById(id);
-  query.exec(function(err, reactie) {
+  query.exec(function (err, reactie) {
     if (err) return next(err);
     if (!reactie) return next(new Error("not found " + id));
     req.reactie = reactie;
@@ -103,28 +103,28 @@ router.param("reactie", function(req, res, next, id) {
 });
 
 /* DELETE één reactie */
-router.delete("/API/bericht/:bericht/reactie/:reactie", auth, function(
+router.delete("/API/bericht/:bericht/reactie/:reactie", auth, function (
   req,
   res
 ) {
-  req.reactie.remove(function(err) {
+  req.reactie.remove(function (err) {
     if (err) return next(err);
     res.json(req.reactie);
   });
 });
 
 /* GET alle categorieen */
-router.get("/API/categorieen", auth, function(req, res, next) {
-  Categorie.find(function(err, categorieen) {
+router.get("/API/categorieen", auth, function (req, res, next) {
+  Categorie.find(function (err, categorieen) {
     if (err) return next(err);
     res.json(categorieen);
   });
 });
 
 /* POST Categorie */
-router.post("/API/categorieen", auth, function(req, res, next) {
-  let categorie = new Categorie({ naam: req.body.naam, graad: req.body.graad });
-  categorie.save(function(err, rec) {
+router.post("/API/categorieen", auth, function (req, res, next) {
+  let categorie = new Categorie({naam: req.body.naam, graad: req.body.graad});
+  categorie.save(function (err, rec) {
     if (err) return next(err);
     res.json(rec);
   });
@@ -134,17 +134,17 @@ router.post("/API/categorieen", auth, function(req, res, next) {
 // Niet nodig, categorieën werden vooraf bepaald.
 
 /* GET Regios */
-router.get("/API/regios", function(req, res, next) {
-  Regio.find(function(err, regios) {
+router.get("/API/regios", function (req, res, next) {
+  Regio.find(function (err, regios) {
     if (err) return next(err);
     res.json(regios);
   });
 });
 
 /* POST Regio */
-router.post("/API/regios", auth, function(req, res, next) {
-  let regio = new Regio({ naam: req.body.naam });
-  regio.save(function(err, rec) {
+router.post("/API/regios", auth, function (req, res, next) {
+  let regio = new Regio({naam: req.body.naam});
+  regio.save(function (err, rec) {
     if (err) return next(err);
     res.json(rec);
   });
