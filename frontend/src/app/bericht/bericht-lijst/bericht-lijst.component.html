@@ -18,5 +18,5 @@
   <app-bericht *ngFor='let localBericht of berichten | berichtFilter:currentUser.regio:filterBerichtTitel |
                paginate: {itemsPerPage: 5, currentPage: p}'
                [bericht]='localBericht'></app-bericht>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls class="mx-auto" (pageChange)="p = $event"></pagination-controls>
 </div>

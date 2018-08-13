@@ -11,6 +11,7 @@ import {SharedModule} from "./shared/shared.module";
 import {PaginaNietGevondenComponent} from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
 import {UserModule} from "./user/user.module";
 import {basehttpInterceptorProviders, httpInterceptorProviders} from "./http-interceptors";
+import {NgxPaginationModule} from "ngx-pagination";
 
 registerLocaleData(localeNl, "nl-BE");
 
@@ -21,6 +22,7 @@ registerLocaleData(localeNl, "nl-BE");
     BrowserModule,
     UserModule,
     SharedModule,
+    NgxPaginationModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
