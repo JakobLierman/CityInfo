@@ -32,9 +32,9 @@ router.post("/API/berichten/", auth, function (req, res, next) {
   let bericht = new Bericht({
     titel: req.body.titel,
     boodschap: req.body.boodschap,
-    categorie: req.body.categorie
+    categorie: req.body.categorie,
+    user: req.body.user
   });
-  // bericht.user = req.user._id;
   bericht.reacties = [];
   bericht.save(function (err, rec) {
     if (err) return next(err);
@@ -73,7 +73,8 @@ router.delete("/API/bericht/:bericht", auth, function (req, res) {
 
 /* GET reacties van bericht */
 router.get("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
-  Reactie.find(function (err, reacties) {
+  let query = Reactie.find().populate("user");
+  query.exec(function (err, reacties) {
     if (err) return next(err);
     res.json(reacties);
   });
@@ -81,7 +82,7 @@ router.get("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
 
 /* POST reactie op bericht */
 router.post("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
-  let reactie = new Reactie(req.body);
+  let reactie = new Reactie(req.body.boodschap, req.body.user);
   reactie.save(function (err, reactie) {
     if (err) return next(err);
     req.bericht.reacties.push(reactie);
@@ -93,7 +94,7 @@ router.post("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
 });
 
 router.param("reactie", function (req, res, next, id) {
-  let query = Reactie.findById(id);
+  let query = Reactie.findById(id).populate("user");
   query.exec(function (err, reactie) {
     if (err) return next(err);
     if (!reactie) return next(new Error("not found " + id));
@@ -103,10 +104,7 @@ router.param("reactie", function (req, res, next, id) {
 });
 
 /* DELETE één reactie */
-router.delete("/API/bericht/:bericht/reactie/:reactie", auth, function (
-  req,
-  res
-) {
+router.delete("/API/bericht/:bericht/reactie/:reactie", auth, function (req, res) {
   req.reactie.remove(function (err) {
     if (err) return next(err);
     res.json(req.reactie);
