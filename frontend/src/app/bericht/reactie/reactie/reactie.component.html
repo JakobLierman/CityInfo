@@ -2,9 +2,9 @@
   <div class="border border-secundary rounded bg-light">
     <div class="container pl-2 pr-2 mt-2 mb-2">
       <p>
-        <span class="font-weight-bold">(( reactie.user.naam ))</span>
+        <span class="font-weight-bold">{{ reactie.user.username }}</span>
         <br>
-        <span class="text-muted ml-auto">{{ reactie.dateAdded | date: 'd/M/yy, h:mm' }}</span>
+        <span class="text-muted ml-auto">{{ reactie.dateAdded | date: 'd/M/yy, H:mm' }}</span>
       </p>
       <p class="font-weight-light">{{ reactie.boodschap }}</p>
       <a *ngIf='isMine()' class="btn btn-danger btn-sm text-white" (click)='verwijderReactie()'>

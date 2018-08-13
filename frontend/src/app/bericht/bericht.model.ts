@@ -36,7 +36,7 @@ export class Bericht {
   private _boodschap: string;
   private _categorie: Categorie;
   private _user: User;
-  private _dateAdded: Date = new Date();
+  private _dateAdded: Date;
   private _reacties: Reactie[];
 
   constructor(

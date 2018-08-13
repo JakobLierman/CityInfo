@@ -10,14 +10,14 @@
      [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
   <div class="container p-3">
     <h2>{{ bericht.titel }}
-      <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
+      <span *ngIf='false' class="badge badge-secondary">Nieuw</span>
+      <!-- ALS BERICHT NIEUW IS -->
     </h2>
     <p>{{ bericht.boodschap }}</p>
     <hr>
     <p class="text-muted">Categorie: {{ bericht.categorie.naam }}
-      <br>Geschreven door (( bericht.user.username )) op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{
-      bericht.dateAdded
-      | date: 'H:mm' }}.</p>
+      <br>Geschreven door {{ bericht.user.username }} op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{
+      bericht.dateAdded | date: 'H:mm' }}.</p>
     <hr>
     <app-reactie-lijst></app-reactie-lijst>
   </div>

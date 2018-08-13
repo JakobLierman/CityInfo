@@ -33,7 +33,8 @@ router.post("/API/berichten/", auth, function (req, res, next) {
     titel: req.body.titel,
     boodschap: req.body.boodschap,
     categorie: req.body.categorie,
-    user: req.body.user
+    user: req.body.user,
+    created: req.body.created
   });
   bericht.reacties = [];
   bericht.save(function (err, rec) {

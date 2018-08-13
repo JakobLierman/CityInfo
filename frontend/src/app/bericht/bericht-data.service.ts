@@ -39,13 +39,12 @@ export class BerichtDataService {
 
   // Reacties
   getReactiesVanBericht(ber: Bericht): Observable<Reactie[]> {
-    const url = `${this._appUrl}/bericht/${ber.id}/reacties`;
-    return this.http.get(url)
-      .pipe(map((list: any[]): Reactie[] => list.map(Reactie.fromJSON)));
+    const url = `${this._appUrl}/bericht/${ber.id}/reacties/`;
+    return this.http.get(url).pipe(map((list: any[]): Reactie[] => list.map(Reactie.fromJSON)));
   }
 
   voegReactieToeAanBericht(rea: Reactie, ber: Bericht): Observable<Reactie> {
-    const url = `${this._appUrl}/bericht/${ber.id}/reacties`;
+    const url = `${this._appUrl}/bericht/${ber.id}/reacties/`;
     return this.http.post(url, rea).pipe(map(Reactie.fromJSON));
   }
 

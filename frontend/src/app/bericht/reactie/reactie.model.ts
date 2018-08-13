@@ -4,7 +4,7 @@ export class Reactie {
   private _id: string;
   private _boodschap: string;
   private _user: User;
-  private _dateAdded: Date = new Date();
+  private _dateAdded: Date;
 
   constructor(boodschap: string, user: User, dateAdded: Date = null) {
     this._boodschap = boodschap;

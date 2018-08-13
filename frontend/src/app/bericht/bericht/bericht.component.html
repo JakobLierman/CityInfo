@@ -2,7 +2,8 @@
      [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
   <div class="card-body">
     <h3 class="card-title">{{ bericht.titel }}
-      <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
+      <span *ngIf='false' class="badge badge-secondary">Nieuw</span>
+      <!-- ALS BERICHT NIEUW IS -->
     </h3>
     <p class="card-text">{{ bericht.boodschap | slice: 0:500 }}
       <br>
@@ -23,7 +24,6 @@
     </a>
   </div>
   <div class="card-footer text-muted">Door {{ bericht.user.username }} op {{ bericht.dateAdded | date: 'EEEE d MMMM
-    yyyy' }} om {{ bericht.dateAdded | date:
-    'H:mm' }}.
+    yyyy' }} om {{ bericht.dateAdded | date:'H:mm' }}.
   </div>
 </div>
