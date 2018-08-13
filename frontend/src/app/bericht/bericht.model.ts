@@ -43,11 +43,13 @@ export class Bericht {
     titel: string,
     boodschap: string,
     categorie: Categorie,
+    user: User,
     dateAdded: Date = null
   ) {
     this._titel = titel;
     this._boodschap = boodschap;
     this._categorie = categorie;
+    this._user = user;
     this._dateAdded = dateAdded ? dateAdded : new Date();
   }
 
@@ -56,10 +58,10 @@ export class Bericht {
       json.titel,
       json.boodschap,
       json.categorie,
+      json.user,
       json.created
     );
     rec._id = json._id;
-    rec._user = json.user;
     rec._reacties = json.reacties.map(Reactie.fromJSON);
     return rec;
   }
@@ -70,7 +72,7 @@ export class Bericht {
       titel: this._titel,
       boodschap: this._boodschap,
       categorie: this._categorie,
-      user: this._user, // currentUser?
+      user: this._user,
       created: this._dateAdded
     };
   }

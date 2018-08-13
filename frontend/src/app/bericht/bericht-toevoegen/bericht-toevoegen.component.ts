@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Bericht, Categorie} from '../bericht.model';
 import {BerichtDataService} from './../bericht-data.service';
 import {Router} from "@angular/router";
+import {User} from "../../user/user.model";
+import {AuthenticationService} from "../../user/authentication.service";
 
 
 @Component({
@@ -14,13 +16,14 @@ import {Router} from "@angular/router";
 export class BerichtToevoegenComponent implements OnInit {
   bericht: FormGroup;
   errorMsg: string;
-
   private _categorieen: Categorie[];
+  private _currentUser: User;
 
   constructor(
     private fb: FormBuilder,
     private _berichtDataService: BerichtDataService,
-    private router: Router
+    private router: Router,
+    private auth: AuthenticationService
   ) {
   }
 
@@ -38,17 +41,27 @@ export class BerichtToevoegenComponent implements OnInit {
       boodschap: ['', [Validators.required, Validators.minLength(25)]],
       categorie: ['', [Validators.required]]
     });
+    if (this.auth.token) {
+      this.auth.currentUser$.subscribe(
+        (user: User) => (this._currentUser = user)
+      );
+    }
   }
 
   get categorieen() {
     return this._categorieen;
   }
 
+  get currentUser(): User {
+    return this._currentUser;
+  }
+
   onSubmit() {
     const bericht = new Bericht(
       this.bericht.value.titel,
       this.bericht.value.boodschap,
-      this.bericht.value.categorie
+      this.bericht.value.categorie,
+      this._currentUser
     );
 
     this._berichtDataService.berichtToevoegen(bericht).subscribe(
