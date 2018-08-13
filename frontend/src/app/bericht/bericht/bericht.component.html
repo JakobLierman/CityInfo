@@ -1,26 +1,29 @@
-<div class="card shadow bg-white rounded mb-4 mt-4" [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
-    <div class="card-body">
-        <h3 class="card-title">{{ bericht.titel }}
-            <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
-        </h3>
-        <p class="card-text">{{ bericht.boodschap | slice: 0:500 }}
-            <br>
-            <a routerLink="/bericht/{{ bericht.id }}"><i class="text-muted" *ngIf='bericht.boodschap.length > 500'>Open het bericht om alles weer te geven.</i></a>
-        </p>
-        <p class="card-text">
-            <small class="text-muted">Categorie: {{ bericht.categorie.naam }}
-                <br>{{ bericht.reacties.length }} reacties.</small>
-        </p>
-        <div class="btn-group" role="group">
-            <a class="btn btn-primary" routerLink="/bericht/{{ bericht.id }}">Openen</a>
-            <a class="btn btn-secondary" routerLink="/bericht/{{ bericht.id }}" fragment="reageren">Reageer</a>
-        </div>
-        <a class="btn btn-danger text-white" (click)='verwijderBericht()'>
-            <!-- IF AUTHOR === USER -->
-            <i class="fas fa-trash"></i> Verwijderen
-        </a>
+<div class="card shadow bg-white rounded mb-4 mt-4"
+     [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
+  <div class="card-body">
+    <h3 class="card-title">{{ bericht.titel }}
+      <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
+    </h3>
+    <p class="card-text">{{ bericht.boodschap | slice: 0:500 }}
+      <br>
+      <a routerLink="/bericht/{{ bericht.id }}"><i class="text-muted" *ngIf='bericht.boodschap.length > 500'>Open het
+        bericht om alles weer te geven.</i></a>
+    </p>
+    <p class="card-text">
+      <small class="text-muted">Categorie: {{ bericht.categorie.naam }}
+        <br>{{ bericht.reacties.length }} reacties.
+      </small>
+    </p>
+    <div class="btn-group" role="group">
+      <a class="btn btn-primary" routerLink="/bericht/{{ bericht.id }}">Openen</a>
+      <a class="btn btn-secondary" routerLink="/bericht/{{ bericht.id }}" fragment="reageren">Reageer</a>
     </div>
-    <div class="card-footer text-muted">Door (( bericht.user.username )) op {{ bericht.dateAdded | date: 'EEEE d MMMM yyyy' }} om {{ bericht.dateAdded | date:
-        'H:mm' }}.
-    </div>
+    <a *ngIf="isMine()" class="btn btn-danger text-white" (click)='verwijderBericht()'>
+      <i class="fas fa-trash"></i> Verwijderen
+    </a>
+  </div>
+  <div class="card-footer text-muted">Door {{ bericht.user.username }} op {{ bericht.dateAdded | date: 'EEEE d MMMM
+    yyyy' }} om {{ bericht.dateAdded | date:
+    'H:mm' }}.
+  </div>
 </div>

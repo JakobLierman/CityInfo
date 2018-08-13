@@ -13,7 +13,8 @@ export class BerichtComponent implements OnInit {
   @Output() public deleteBericht = new EventEmitter<Bericht>();
   private _currentUser: User;
 
-  constructor(private _auth: AuthenticationService) {}
+  constructor(private _auth: AuthenticationService) {
+  }
 
   get currentUser(): User {
     return this._currentUser;
@@ -25,6 +26,10 @@ export class BerichtComponent implements OnInit {
         (user: User) => (this._currentUser = user)
       );
     }
+  }
+
+  isMine() {
+    return this.bericht.user.username === this._currentUser.username;
   }
 
   verwijderBericht() {
