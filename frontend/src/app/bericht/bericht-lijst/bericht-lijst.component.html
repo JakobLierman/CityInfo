@@ -15,7 +15,7 @@
   <strong>Oh ow</strong> {{ errorMsg }}
 </div>
 <div>
-  <app-bericht *ngFor='let localBericht of berichten | berichtFilter:currentUser.regio:filterBerichtTitel |
+  <app-bericht *ngFor='let localBericht of berichten | reverse | berichtFilter:currentUser.regio:filterBerichtTitel |
                paginate: {itemsPerPage: 5, currentPage: p}'
                [bericht]='localBericht'></app-bericht>
   <pagination-controls class="mx-auto" (pageChange)="p = $event"></pagination-controls>
