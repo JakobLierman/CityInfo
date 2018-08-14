@@ -106,6 +106,7 @@ export class Bericht {
   }
 
   isNieuw(): boolean {
-    return this._dateAdded.getDate() === new Date().getDate();
+    const t = new Date().getTime() - (24 * 60 * 60 * 1000);
+    return new Date(this._dateAdded).getTime() > t;
   }
 }

@@ -10,7 +10,7 @@
      [ngClass]='{"border-danger": bericht.categorie.graad === 1, "border-warning": bericht.categorie.graad === 2, "border-info": bericht.categorie.graad === 3}'>
   <div class="container p-3">
     <h2>{{ bericht.titel }}
-      <span *ngIf='false' class="badge badge-secondary">Nieuw</span>
+      <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
       <!-- ALS BERICHT NIEUW IS -->
     </h2>
     <p>{{ bericht.boodschap }}</p>
