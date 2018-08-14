@@ -1,6 +1,12 @@
-<div *ngIf='errorMsg' class="alert alert-danger">
+<div *ngIf='errorMsg' class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>Oh ow</strong> {{ errorMsg }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">
+        <i class="material-icons">clear</i>
+      </span>
+  </button>
 </div>
+
 <div *ngIf='bericht.reacties.length === 0' class="font-weight-light">
   <p>
     <i>Wees de eerste om te reageren!</i>

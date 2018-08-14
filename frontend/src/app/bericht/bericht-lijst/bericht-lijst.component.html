@@ -2,6 +2,7 @@
   <input (keyup)='filterBericht$.next($event.target.value)' type='text' class="form-control" id='filter' name='filter'
          placeholder='Zoeken op titel'>
 </div>
+
 <div *ngIf="false" class="alert alert-success alert-dismissible fade show" role="alert">
   <!-- ALS ER EEN NIEUW BERICHT WERD GEPLAATST -->
   <strong>Gelukt!</strong> Het bericht werd succesvol toegevoegd.
@@ -11,9 +12,16 @@
     </span>
   </button>
 </div>
-<div *ngIf='errorMsg' class="alert alert-danger">
+
+<div *ngIf='errorMsg' class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>Oh ow</strong> {{ errorMsg }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">
+        <i class="material-icons">clear</i>
+      </span>
+  </button>
 </div>
+
 <div>
   <app-bericht *ngFor='let localBericht of berichten | reverse | berichtFilter:currentUser.regio:filterBerichtTitel |
                paginate: {itemsPerPage: 5, currentPage: p}'

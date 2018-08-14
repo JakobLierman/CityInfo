@@ -1,4 +1,11 @@
-<div *ngIf='errorMsg' class="alert alert-danger">{{errorMsg}}</div>
+<div *ngIf='errorMsg' class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Oh ow</strong> {{ errorMsg }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">
+        <i class="material-icons">clear</i>
+      </span>
+  </button>
+</div>
 
 <form [formGroup]='user' (ngSubmit)='onSubmit()' class="col-xl-6 col-md-8 col-sm-12">
   <h2>Registreren</h2>
