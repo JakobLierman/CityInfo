@@ -11,18 +11,17 @@
 
   <div class="form-group">
     <div class="input-group">
-      <input type="text" [ngClass]='{"is-invalid": !!reactie.get("boodschap").errors && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)}'
-        class="form-control" formControlName='boodschap' name='boodschap' placeholder="Reactie" id="reageren" required>
+      <input type="text"
+             [ngClass]='{"is-invalid": !!reactie.get("boodschap").errors && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)}'
+             class="form-control" formControlName='boodschap' name='boodschap' placeholder="Reactie" id="reageren"
+             required>
       <div class="input-group-append">
         <button [disabled]="!reactie.valid" class="btn btn-primary" type="submit">
-          <i class="fas fa-comment"></i> Reageer</button>
+          <i class="fas fa-comment"></i> Reageer
+        </button>
       </div>
+      <div class="invalid-feedback">Een reactie kan niet leeg zijn.</div>
     </div>
-  </div>
-
-  <div *ngIf='!!reactie.get("boodschap").errors?.required && (reactie.get("boodschap").touched || reactie.get("boodschap").dirty)'
-    class="alert alert-danger" role="alert">
-    Een reactie kan niet leeg zijn.
   </div>
 
 </form>
