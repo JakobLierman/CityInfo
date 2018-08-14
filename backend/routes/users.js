@@ -18,7 +18,7 @@ router.get("/", auth, function (req, res, next) {
 
 /* Get user by id */
 router.param("userid", function (req, res, next, id) {
-  let query = User.findById(id).populate("regio");
+  let query = User.findById(id);
   query.exec(function (err, user) {
     if (err) return next(err);
     if (!user) return next(new Error("not found " + id));
@@ -33,7 +33,7 @@ router.get("/id/:userid", auth, function (req, res, next) {
 
 /* Get user by username */
 router.param("username", function (req, res, next, username) {
-  let query = User.find({username: username}).populate('regio');
+  let query = User.find({username: username});
   query.exec(function (err, user) {
     if (err) return next(err);
     if (!user) return next(new Error("not found " + username));
