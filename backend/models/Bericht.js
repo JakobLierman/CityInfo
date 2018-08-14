@@ -11,7 +11,7 @@ let BerichtSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  dateAdded: { type: Date, default: Date.now },
+  created: {type: Date, default: Date.now},
   reacties: [
     {
       type: mongoose.Schema.Types.ObjectId,

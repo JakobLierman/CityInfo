@@ -83,7 +83,11 @@ router.get("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
 
 /* POST reactie op bericht */
 router.post("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
-  let reactie = new Reactie(req.body.boodschap, req.body.user);
+  let reactie = new Reactie({
+    boodschap: req.body.boodschap,
+    user: req.body.user,
+    dateAdded: req.body.created
+  });
   reactie.save(function (err, reactie) {
     if (err) return next(err);
     req.bericht.reacties.push(reactie);
