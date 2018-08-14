@@ -16,12 +16,12 @@
       </small>
     </p>
     <div class="btn-group" role="group">
-      <a class="btn btn-primary" routerLink="/bericht/{{ bericht.id }}">Openen</a>
-      <a class="btn btn-secondary" routerLink="/bericht/{{ bericht.id }}" fragment="reageren">Reageer</a>
+      <button class="btn btn-primary" routerLink="/bericht/{{ bericht.id }}">Openen</button>
+      <button class="btn btn-secondary" routerLink="/bericht/{{ bericht.id }}" fragment="reageren">Reageer</button>
     </div>
-    <a *ngIf="isMine()" class="btn btn-danger text-white" (click)='verwijderBericht()'>
+    <button *ngIf="isMine()" class="btn btn-danger text-white" (click)='verwijderBericht()'>
       <i class="fas fa-trash"></i> Verwijderen
-    </a>
+    </button>
   </div>
   <div class="card-footer text-muted">Door {{ bericht.user.username }} op {{ bericht.dateAdded | date: 'EEEE d MMMM
     yyyy' }} om {{ bericht.dateAdded | date:'H:mm' }}.

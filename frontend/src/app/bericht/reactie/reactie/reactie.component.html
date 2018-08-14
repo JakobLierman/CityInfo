@@ -7,9 +7,9 @@
         <span class="text-muted ml-auto">{{ reactie.dateAdded | date: 'd/M/yy, H:mm' }}</span>
       </p>
       <p class="font-weight-light">{{ reactie.boodschap }}</p>
-      <a *ngIf='isMine()' class="btn btn-danger btn-sm text-white" (click)='verwijderReactie()'>
+      <button *ngIf='isMine()' class="btn btn-danger btn-sm text-white" (click)='verwijderReactie()'>
         <i class="fas fa-trash"></i> Verwijderen
-      </a>
+      </button>
     </div>
   </div>
 </div>
