@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row mb-4">
     <app-back-button></app-back-button>
-    <a *ngIf='isMine()' class="btn btn-danger btn-sm text-white ml-auto">
+    <button *ngIf='isMine()' class="btn btn-danger btn-sm ml-auto" (click)="verwijderBericht()">
       <i class="fas fa-trash"></i> Verwijderen
-    </a>
+    </button>
   </div>
 </div>
 <div class="border rounded"

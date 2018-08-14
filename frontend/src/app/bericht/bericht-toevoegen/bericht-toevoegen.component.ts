@@ -57,16 +57,13 @@ export class BerichtToevoegenComponent implements OnInit {
       this.bericht.value.categorie,
       this.currentUser
     );
-
-    this._berichtDataService.berichtToevoegen(bericht).subscribe(
-      () => {
+    this._berichtDataService.berichtToevoegen(bericht).subscribe(() => {
         this.router.navigate(['bericht/lijst']);
       },
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} bij het toevoegen van bericht met titel "${
           bericht.titel
           }": ${error.error}`;
-      }
-    );
+      });
   }
 }

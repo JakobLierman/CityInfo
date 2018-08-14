@@ -50,12 +50,7 @@ export class BerichtLijstComponent implements OnInit {
     return this.auth.currentUser;
   }
 
-  verwijderBericht(bericht: Bericht) {
-    this.berichtDataService.verwijderBericht(bericht).subscribe(
-      item => (this._berichten = this._berichten.filter(val => item.id !== val.id)),
-      (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} bij het verwijderen van bericht met titel "${bericht.titel}": ${error.error}`;
-      }
-    );
+  berichtVerwijderen(bericht: Bericht) {
+    this._berichten.splice(this._berichten.indexOf(bericht), 1);
   }
 }

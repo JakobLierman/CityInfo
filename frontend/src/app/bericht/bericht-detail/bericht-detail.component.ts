@@ -1,9 +1,10 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Bericht} from '../bericht.model';
 import {User} from "../../user/user.model";
 import {AuthenticationService} from "../../user/authentication.service";
+import {BerichtDataService} from "../bericht-data.service";
 
 @Component({
   selector: 'app-bericht-detail',
@@ -14,7 +15,12 @@ export class BerichtDetailComponent implements OnInit {
   private _bericht: Bericht;
   public errorMsg: string;
 
-  constructor(private route: ActivatedRoute, private auth: AuthenticationService) {
+  constructor(
+    private route: ActivatedRoute,
+    private auth: AuthenticationService,
+    private berichtDataService: BerichtDataService,
+    private router: Router
+  ) {
   }
 
   get bericht(): Bericht {
@@ -38,5 +44,17 @@ export class BerichtDetailComponent implements OnInit {
 
   isMine() {
     return this.bericht.user.username === this.currentUser.username;
+  }
+
+  verwijderBericht() {
+    if (this.isMine()) {
+      this.berichtDataService
+        .verwijderBericht(this.bericht)
+        .subscribe(() => {
+          this.router.navigate(['bericht/lijst']);
+        }, (error: HttpErrorResponse) => {
+          this.errorMsg = `Error ${error.status} bij het verwijderen van bericht met titel '${this.bericht.titel}': ${error.error}`;
+        });
+    }
   }
 }
