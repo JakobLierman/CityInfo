@@ -1,9 +1,9 @@
-import { ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { BerichtDataService } from '../../bericht-data.service';
-import { Bericht } from '../../bericht.model';
-import { Reactie } from '../reactie.model';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {BerichtDataService} from '../../bericht-data.service';
+import {Bericht} from '../../bericht.model';
+import {Reactie} from '../reactie.model';
 
 @Component({
   selector: 'app-reactie-lijst',
@@ -15,7 +15,8 @@ export class ReactieLijstComponent implements OnInit {
   private _reacties: Reactie[];
   public errorMsg: string;
 
-  constructor(private _berichtDataService: BerichtDataService, private route: ActivatedRoute) { }
+  constructor(private _berichtDataService: BerichtDataService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.data.subscribe(
@@ -40,13 +41,12 @@ export class ReactieLijstComponent implements OnInit {
     return this._bericht;
   }
 
-  verwijderReactie(reactie: Reactie) {
-    this._berichtDataService.verwijderReactieVanBericht(reactie, this._bericht).subscribe(
-      item => (this._reacties = this._reacties.filter(val => item.id !== val.id)),
-      (error: HttpErrorResponse) => {
-        this.errorMsg = `Error $error.status} bij het verwijderen van de reactie= ${error.error}`;
-      }
-    );
+  reactieToevoegen(reactie: Reactie) {
+    this._reacties.push(reactie);
+  }
+
+  reactieVerwijderen(reactie: Reactie) {
+    this._reacties.splice(this._reacties.indexOf(reactie), 1);
   }
 
 }

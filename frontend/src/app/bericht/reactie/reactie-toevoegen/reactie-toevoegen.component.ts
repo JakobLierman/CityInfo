@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Reactie} from '../reactie.model';
 import {AuthenticationService} from "../../../user/authentication.service";
 import {User} from "../../../user/user.model";
+import {ReactieLijstComponent} from "../reactie-lijst/reactie-lijst.component";
 
 @Component({
   selector: 'app-reactie-toevoegen',
@@ -22,7 +23,8 @@ export class ReactieToevoegenComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private berichtDataService: BerichtDataService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private reactieLijst: ReactieLijstComponent
   ) {
   }
 
@@ -52,10 +54,10 @@ export class ReactieToevoegenComponent implements OnInit {
     const reactie = new Reactie(this.reactie.value.boodschap, this.currentUser);
     this.berichtDataService
       .voegReactieToeAanBericht(reactie, this._bericht)
-      .subscribe(
-        () => {
+      .subscribe((val) => {
+          reactie.id = val.id;
+          this.reactieLijst.reactieToevoegen(reactie);
           this.reactie.reset();
-          this._bericht.reactieToevoegen(reactie);
         },
         (error: HttpErrorResponse) => {
           this.errorMsg = `Error ${

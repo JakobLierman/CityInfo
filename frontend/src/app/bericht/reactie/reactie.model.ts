@@ -35,6 +35,10 @@ export class Reactie {
     return this._id;
   }
 
+  set id(id: string) {
+    this._id = id;
+  }
+
   get boodschap(): string {
     return this._boodschap;
   }

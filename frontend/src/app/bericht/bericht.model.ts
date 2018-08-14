@@ -108,13 +108,4 @@ export class Bericht {
   isNieuw(): boolean {
     return this._dateAdded.getDate() === new Date().getDate();
   }
-
-  reactieToevoegen(reactie: Reactie) {
-    this._reacties.push(reactie);
-  }
-
-  reactieVerwijderen(reactie: Reactie) {
-    const index = this._reacties.indexOf(reactie);
-    this._reacties.splice(index, 1);
-  }
 }
