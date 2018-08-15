@@ -1,9 +1,11 @@
 <div *ngIf="!currentUser">
-  <button class="btn btn-sm btn-outline-primary ml-1" routerLink="/registreer">Registreren</button>
-  <button class="btn btn-sm btn-outline-secondary ml-1" routerLink="/aanmelden">Aanmelden</button>
+  <button class="btn btn-sm btn-outline-primary ml-1" (click)='navigate("/registreer")'>Registreren</button>
+  <button class="btn btn-sm btn-outline-secondary ml-1" (click)='navigate("/aanmelden")'>Aanmelden</button>
 </div>
 <div *ngIf="currentUser">
   <i class="mr-2">Hallo, {{ currentUser.naam }}!</i>
-  <button class="btn btn-sm btn-outline-primary ml-1 d-none" routerLink="/gebruiker/wijzigen">Gegevens wijzigen</button>
-  <button class="btn btn-sm btn-outline-secondary ml-1" routerLink="/afmelden">Afmelden</button>
+  <button class="btn btn-sm btn-outline-primary ml-1 d-none" (click)='navigate("/gebruiker/wijzigen")'>Gegevens
+    wijzigen
+  </button>
+  <button class="btn btn-sm btn-outline-secondary ml-1" (click)='navigate("/afmelden")'>Afmelden</button>
 </div>

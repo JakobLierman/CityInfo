@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../user/authentication.service";
 import {User} from "../../user/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav-user',
@@ -10,7 +11,7 @@ import {User} from "../../user/user.model";
 export class NavUserComponent implements OnInit {
   public errorMsg: string;
 
-  constructor(private auth: AuthenticationService) {
+  constructor(private auth: AuthenticationService, private router: Router) {
   }
 
   get currentUser(): User {
@@ -19,4 +20,9 @@ export class NavUserComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  navigate(url: string) {
+    this.router.navigateByUrl(url);
+  }
+
 }
