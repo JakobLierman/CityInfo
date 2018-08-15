@@ -5,23 +5,33 @@
       <span *ngIf='bericht.isNieuw()' class="badge badge-secondary">Nieuw</span>
       <!-- ALS BERICHT NIEUW IS -->
     </h3>
+
     <p class="card-text">{{ bericht.boodschap | slice: 0:500 }}
       <br>
       <a routerLink="/bericht/{{ bericht.id }}"><i class="text-muted" *ngIf='bericht.boodschap.length > 500'>Open het
         bericht om alles weer te geven.</i></a>
     </p>
+
     <p class="card-text">
       <small class="text-muted">Categorie: {{ bericht.categorie.naam }}
         <br>{{ bericht.reacties.length }} reacties.
       </small>
     </p>
+
     <div class="btn-group" role="group">
       <button class="btn btn-primary" routerLink="/bericht/{{ bericht.id }}">Openen</button>
-      <button class="btn btn-secondary" routerLink="/bericht/{{ bericht.id }}" fragment="reageren">Reageer</button>
+      <button class="btn btn-secondary" (click)="reactieVeldWeergeven = !reactieVeldWeergeven">Reageer</button>
     </div>
+
     <button *ngIf="isMine()" class="btn btn-danger text-white" (click)='verwijderBericht()'>
       <i class="fas fa-trash"></i> Verwijderen
     </button>
+
+    <div *ngIf="reactieVeldWeergeven" class="alert alert-info mt-2">Binnenkort kan je hier ook reageren! Open het
+      bericht om
+      nu een reactie toe te voegen.
+    </div>
+    <!--<app-reactie-toevoegen></app-reactie-toevoegen>-->
   </div>
   <div class="card-footer text-muted">Door {{ bericht.user.username }} op {{ bericht.dateAdded | date: 'EEEE d MMMM
     yyyy' }} om {{ bericht.dateAdded | date:'H:mm' }}.

@@ -3,7 +3,7 @@ import {Bericht} from '../bericht.model';
 import {User} from "../../user/user.model";
 import {AuthenticationService} from "../../user/authentication.service";
 import {BerichtDataService} from "../bericht-data.service";
-import {HttpErrorResponse} from "../../../../node_modules/@angular/common/http";
+import {HttpErrorResponse} from "@angular/common/http";
 import {BerichtLijstComponent} from "../bericht-lijst/bericht-lijst.component";
 
 @Component({
@@ -13,6 +13,7 @@ import {BerichtLijstComponent} from "../bericht-lijst/bericht-lijst.component";
 })
 export class BerichtComponent implements OnInit {
   @Input() public bericht: Bericht;
+  public reactieVeldWeergeven = false;
 
   constructor(
     private auth: AuthenticationService,
@@ -38,6 +39,7 @@ export class BerichtComponent implements OnInit {
         .verwijderBericht(this.bericht)
         .subscribe(() => {
             this.berichtLijst.berichtVerwijderen(this.bericht);
+            this.berichtLijst.successMsg = "Het bericht werd succesvol verwijderd.";
           },
           (error: HttpErrorResponse) => {
             this.berichtLijst.errorMsg =
