@@ -17,6 +17,7 @@ export class BerichtLijstComponent implements OnInit {
   public filterBericht$ = new Subject<string>();
   public errorMsg: string;
   private _berichten: Bericht[];
+  private currentPage: number;
 
   constructor(
     private berichtDataService: BerichtDataService,
@@ -50,7 +51,13 @@ export class BerichtLijstComponent implements OnInit {
     return this.auth.currentUser;
   }
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    window.scrollTo(0, 0);
+  }
+
   berichtVerwijderen(bericht: Bericht) {
     this._berichten.splice(this._berichten.indexOf(bericht), 1);
+    window.scrollTo(0, 0);
   }
 }

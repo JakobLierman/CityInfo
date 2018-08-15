@@ -28,7 +28,7 @@
 </div>
 <div *ngIf="berichten?.length !== 0">
   <app-bericht *ngFor='let localBericht of berichten | reverse | berichtFilter:currentUser.regio:filterBerichtTitel |
-               paginate: {itemsPerPage: 5, currentPage: p}'
+               paginate: {itemsPerPage: 5, currentPage: currentPage}'
                [bericht]='localBericht'></app-bericht>
-  <pagination-controls *ngIf="berichten?.length > 5" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls *ngIf="berichten?.length > 5" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
