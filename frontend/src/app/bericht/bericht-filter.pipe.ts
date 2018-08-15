@@ -14,6 +14,6 @@ export class BerichtFilterPipe implements PipeTransform {
       return berichten;
     }
     const regioFilter = berichten.filter(ber => ber.user.regio === regio);
-    return regioFilter.filter(ber => ber.titel.toLowerCase().startsWith(titel.toLowerCase()));
+    return regioFilter.filter(ber => ber.titel.toLowerCase().includes(titel.toLowerCase()));
   }
 }
