@@ -11,8 +11,8 @@ let jwt = require("express-jwt");
 let auth = jwt({secret: process.env.CITYINFO_BACKEND_SECRET});
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.send("server works");
+router.get("/API", function (req, res, next) {
+  res.send("CityInfo server up and running");
 });
 
 /* GET berichten */

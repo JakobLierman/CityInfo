@@ -12,7 +12,8 @@ export class UserDataService {
   }
 
   testServer() {
-    // TODO - Implement testServer method
+    this.http.get(`${this._appUrl}/`, {responseType: 'text'})
+      .subscribe(res => console.log(res));
   }
 
   // Users
