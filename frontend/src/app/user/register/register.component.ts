@@ -68,7 +68,9 @@ export class RegisterComponent implements OnInit {
 
   get regios() {
     const regioArray: string[] = [];
-    this._regios.forEach(r => regioArray.push(r.naam));
+    if (this._regios) {
+      this._regios.forEach(r => regioArray.push(r.naam));
+    }
     return regioArray;
   }
 
