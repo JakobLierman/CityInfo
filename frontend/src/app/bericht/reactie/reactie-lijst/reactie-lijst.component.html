@@ -7,12 +7,12 @@
   </button>
 </div>
 
-<div *ngIf='bericht.reacties.length === 0' class="font-weight-light">
+<div *ngIf='reacties?.length === 0' class="font-weight-light">
   <p>
     <i>Wees de eerste om te reageren!</i>
   </p>
 </div>
-<div *ngIf='bericht.reacties.length !== 0'>
+<div *ngIf='reacties?.length !== 0'>
   <app-reactie *ngFor='let localReactie of reacties' [reactie]='localReactie'></app-reactie>
 </div>
 <app-reactie-toevoegen></app-reactie-toevoegen>

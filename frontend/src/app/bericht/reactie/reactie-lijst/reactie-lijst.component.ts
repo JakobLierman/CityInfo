@@ -12,7 +12,6 @@ import {Reactie} from '../reactie.model';
 })
 export class ReactieLijstComponent implements OnInit {
   private _bericht: Bericht;
-  private _reacties: Reactie[];
   public errorMsg: string;
 
   constructor(private _berichtDataService: BerichtDataService, private route: ActivatedRoute) {
@@ -25,16 +24,10 @@ export class ReactieLijstComponent implements OnInit {
         this.errorMsg = `Error ${error.status} bij het ophalen van het bericht: ${error.error}`;
       }
     );
-    this._berichtDataService.getReactiesVanBericht(this._bericht).subscribe(
-      reacties => (this._reacties = reacties),
-      (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} bij het ophalen van reactie`;
-      }
-    );
   }
 
   get reacties(): Reactie[] {
-    return this._reacties;
+    return this._bericht.reacties;
   }
 
   get bericht(): Bericht {
@@ -42,11 +35,11 @@ export class ReactieLijstComponent implements OnInit {
   }
 
   reactieToevoegen(reactie: Reactie) {
-    this._reacties.push(reactie);
+    this._bericht.reacties.push(reactie);
   }
 
   reactieVerwijderen(reactie: Reactie) {
-    this._reacties.splice(this._reacties.indexOf(reactie), 1);
+    this._bericht.reacties.splice(this._bericht.reacties.indexOf(reactie), 1);
   }
 
 }

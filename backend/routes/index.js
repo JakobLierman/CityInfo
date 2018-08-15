@@ -18,7 +18,7 @@ router.get("/", function (req, res, next) {
 /* GET berichten */
 router.get("/API/berichten", auth, function (req, res, next) {
   let query = Bericht.find()
-    .populate("reacties")
+    .populate({path: "reacties", populate: {path: "user"}})
     .populate("categorie")
     .populate("user");
   query.exec(function (err, berichten) {
@@ -45,9 +45,9 @@ router.post("/API/berichten/", auth, function (req, res, next) {
 
 router.param("bericht", function (req, res, next, id) {
   let query = Bericht.findById(id)
-    .populate("reacties")
-    .populate("categorie")
-    .populate("user");
+    .populate({path: "reacties", populate: {path: "user"}})
+    .populate("user")
+    .populate("categorie");
   query.exec(function (err, bericht) {
     if (err) return next(err);
     if (!bericht) return next(new Error("not found " + id));
