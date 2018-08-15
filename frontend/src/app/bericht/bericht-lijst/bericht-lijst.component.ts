@@ -57,6 +57,7 @@ export class BerichtLijstComponent implements OnInit {
   }
 
   berichtVerwijderen(bericht: Bericht) {
+    this.filterBerichtTitel = "";
     this._berichten.splice(this._berichten.indexOf(bericht), 1);
     window.scrollTo(0, 0);
   }
