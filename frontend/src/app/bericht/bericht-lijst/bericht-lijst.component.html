@@ -22,9 +22,13 @@
   </button>
 </div>
 
-<div>
+<div *ngIf="berichten?.length === 0" class="font-weight-light col-md-8 offset-md-2 text-center">
+  <p><i>Er zijn nog geen berichten voor de regio {{ currentUser.regio }}.</i></p>
+  <button class="btn btn-primary btn-lg btn-block" routerLink="/bericht/nieuw">Plaats als eerste een bericht!</button>
+</div>
+<div *ngIf="berichten?.length !== 0">
   <app-bericht *ngFor='let localBericht of berichten | reverse | berichtFilter:currentUser.regio:filterBerichtTitel |
                paginate: {itemsPerPage: 5, currentPage: p}'
                [bericht]='localBericht'></app-bericht>
-  <pagination-controls class="mx-auto" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls *ngIf="berichten?.length > 5" (pageChange)="p = $event"></pagination-controls>
 </div>
