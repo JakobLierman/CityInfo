@@ -3,9 +3,8 @@
          placeholder='Zoeken op titel'>
 </div>
 
-<div *ngIf="false" class="alert alert-success alert-dismissible fade show" role="alert">
-  <!-- ALS ER EEN NIEUW BERICHT WERD GEPLAATST -->
-  <strong>Gelukt!</strong> Het bericht werd succesvol toegevoegd.
+<div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Gelukt!</strong> {{ successMsg }}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">
       <i class="material-icons">clear</i>

@@ -52,6 +52,7 @@ export class BerichtDetailComponent implements OnInit {
         .verwijderBericht(this.bericht)
         .subscribe(() => {
           this.router.navigate(['bericht/lijst']);
+          // this.berichtLijst.successMsg = "Het bericht werd succesvol verwijderd.";
         }, (error: HttpErrorResponse) => {
           this.errorMsg = `Error ${error.status} bij het verwijderen van bericht met titel '${this.bericht.titel}': ${error.error}`;
         });

@@ -59,6 +59,7 @@ export class BerichtToevoegenComponent implements OnInit {
     );
     this._berichtDataService.berichtToevoegen(bericht).subscribe(() => {
         this.router.navigate(['bericht/lijst']);
+        // this.berichtLijst.successMsg = "Het bericht werd succesvol geplaatst.";
       },
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} bij het toevoegen van bericht met titel "${

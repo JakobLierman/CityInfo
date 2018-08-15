@@ -17,6 +17,7 @@ export class BerichtLijstComponent implements OnInit {
   public filterBericht$ = new Subject<string>();
   public errorMsg: string;
   private _berichten: Bericht[];
+  public successMsg: string;
   private currentPage: number;
 
   constructor(
