@@ -1,6 +1,6 @@
-import {BerichtDataService} from './../../bericht-data.service';
+import {BerichtDataService} from '../../bericht-data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Bericht} from './../../bericht.model';
+import {Bericht} from '../../bericht.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';

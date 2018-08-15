@@ -12,13 +12,12 @@ import {AuthenticationService} from "../../user/authentication.service";
   styleUrls: ['./bericht-lijst.component.css']
 })
 export class BerichtLijstComponent implements OnInit {
-  p = 1;
   public filterBerichtTitel: string;
   public filterBericht$ = new Subject<string>();
   public errorMsg: string;
   private _berichten: Bericht[];
   public successMsg: string;
-  private currentPage: number;
+  private currentPage = 1;
 
   constructor(
     private berichtDataService: BerichtDataService,
