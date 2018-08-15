@@ -26,7 +26,7 @@
   <button class="btn btn-primary btn-lg btn-block" routerLink="/bericht/nieuw">Plaats als eerste een bericht!</button>
 </div>
 <div *ngIf="berichten?.length !== 0">
-  <app-bericht *ngFor='let localBericht of berichten | reverse | berichtFilter:currentUser.regio:filterBerichtTitel |
+  <app-bericht *ngFor='let localBericht of berichten | reverse | berichtFilter:filterBerichtTitel |
                paginate: {itemsPerPage: 5, currentPage: currentPage}'
                [bericht]='localBericht'></app-bericht>
   <pagination-controls *ngIf="berichten?.length > 5" (pageChange)="onPageChange($event)"></pagination-controls>

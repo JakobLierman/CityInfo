@@ -35,7 +35,7 @@ export class BerichtLijstComponent implements OnInit {
 
   ngOnInit(): void {
     this.berichtDataService.berichten.subscribe(
-      berichten => (this._berichten = berichten),
+      berichten => (this._berichten = berichten.filter(ber => ber.user.regio === this.currentUser.regio)),
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
