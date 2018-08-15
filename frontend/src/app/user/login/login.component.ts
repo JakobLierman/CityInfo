@@ -1,17 +1,8 @@
 import {AuthenticationService} from '../authentication.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
-
-function passwordValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } => {
-    console.log(control.value);
-    return control.value.length < 12
-      ? {passwordTooShort: {value: control.value.length}}
-      : null;
-  };
-}
 
 @Component({
   selector: 'app-login',
@@ -58,9 +49,13 @@ export class LoginComponent implements OnInit {
               this.user.value.username
               }: ${err.error.message}`;
           } else {
-            this.errorMsg = `Error ${err.status} while trying to login user ${
-              this.user.value.username
-              }: ${err.error}`;
+            if (err.status === 401) {
+              this.errorMsg = `Fout bij het aanmelden. Incorrecte gebruikersnaam of wachtwoord.`;
+            } else {
+              this.errorMsg = `Error ${err.status} while trying to login user ${
+                this.user.value.username
+                }: ${err.error}`;
+            }
           }
         }
       );
