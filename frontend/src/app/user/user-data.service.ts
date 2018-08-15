@@ -11,6 +11,10 @@ export class UserDataService {
   constructor(private http: HttpClient) {
   }
 
+  testServer() {
+    // TODO - Implement testServer method
+  }
+
   // Users
   get users(): Observable<User[]> {
     return this.http
