@@ -1,4 +1,4 @@
-import {HttpClientModule} from "@angular/common/http";
+import {HttpModule} from "@angular/http";
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -39,8 +39,8 @@ const routes = [
     BerichtDetailComponent
   ],
   imports: [
-    HttpClientModule,
     CommonModule,
+    HttpModule,
     ReactiveFormsModule,
     SharedModule,
     NgxPaginationModule,
