@@ -10,10 +10,10 @@ export class BerichtFilterPipe implements PipeTransform {
     if (!berichten) {
       return [];
     }
+    const berichtenPerRegio = berichten.filter(ber => ber.user.regio === regio);
     if (!titel || titel.length === 0) {
-      return berichten;
+      return berichtenPerRegio;
     }
-    const regioFilter = berichten.filter(ber => ber.user.regio === regio);
-    return regioFilter.filter(ber => ber.titel.toLowerCase().includes(titel.toLowerCase()));
+    return berichtenPerRegio.filter(ber => ber.titel.toLowerCase().includes(titel.toLowerCase()));
   }
 }
