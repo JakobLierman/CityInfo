@@ -21,7 +21,7 @@
       [ngClass]='{"is-invalid": !!bericht.get("titel").errors && (bericht.get("titel").touched || bericht.get("titel").dirty)}'
       class="form-control" id="titel" name="titel" formControlName='titel' minlength="2" maxlength="100"
       placeholder="Titel"
-      required>
+      required autofocus>
     <div class="invalid-feedback">Een bericht moet een titel hebben van meer dan 2 tekens.</div>
   </div>
 
