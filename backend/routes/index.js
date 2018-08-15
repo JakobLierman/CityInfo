@@ -63,7 +63,7 @@ router.get("/API/bericht/:bericht", auth, function (req, res, next) {
 
 /* DELETE bericht */
 router.delete("/API/bericht/:bericht", auth, function (req, res) {
-  Reactie.remove({_id: {$re: req.bericht.reacties}}, function (err) {
+  Reactie.remove({_id: {$in: req.bericht.reacties}}, function (err) {
     if (err) return next(err);
     req.bericht.remove(function (err) {
       if (err) return next(err);
