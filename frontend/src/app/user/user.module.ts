@@ -9,7 +9,7 @@ import {RegisterComponent} from "./register/register.component";
 import {LogoutComponent} from "./logout/logout.component";
 import {UserDataService} from "./user-data.service";
 import {AuthGuardService} from "./auth-guard.service";
-import {basehttpInterceptorProviders, httpInterceptorProviders} from "../http-interceptors";
+import {httpInterceptorProviders} from "../http-interceptors";
 
 const routes = [
   {path: "aanmelden", component: LoginComponent},
@@ -26,7 +26,6 @@ const routes = [
   ],
   declarations: [LoginComponent, RegisterComponent, LogoutComponent],
   providers: [
-    basehttpInterceptorProviders,
     httpInterceptorProviders,
     AuthenticationService,
     AuthGuardService,

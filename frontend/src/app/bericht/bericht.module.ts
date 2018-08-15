@@ -14,7 +14,7 @@ import {BerichtComponent} from "./bericht/bericht.component";
 import {ReactieLijstComponent} from "./reactie/reactie-lijst/reactie-lijst.component";
 import {ReactieToevoegenComponent} from "./reactie/reactie-toevoegen/reactie-toevoegen.component";
 import {ReactieComponent} from "./reactie/reactie/reactie.component";
-import {basehttpInterceptorProviders, httpInterceptorProviders} from "../http-interceptors";
+import {httpInterceptorProviders} from "../http-interceptors";
 import {NgxPaginationModule} from "ngx-pagination";
 
 const routes = [
@@ -47,7 +47,6 @@ const routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    basehttpInterceptorProviders,
     httpInterceptorProviders,
     BerichtDataService,
     BerichtResolver

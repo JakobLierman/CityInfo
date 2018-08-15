@@ -10,8 +10,8 @@ import {HomeComponent} from "./home/home.component";
 import {SharedModule} from "./shared/shared.module";
 import {PaginaNietGevondenComponent} from "./pagina-niet-gevonden/pagina-niet-gevonden.component";
 import {UserModule} from "./user/user.module";
-import {basehttpInterceptorProviders, httpInterceptorProviders} from "./http-interceptors";
 import {NgxPaginationModule} from "ngx-pagination";
+import {basehttpInterceptorProviders, httpInterceptorProviders} from "./http-interceptors";
 
 registerLocaleData(localeNl, "nl-BE");
 
