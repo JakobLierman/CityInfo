@@ -37,9 +37,9 @@ router.post("/API/berichten/", auth, function (req, res, next) {
     created: req.body.created
   });
   bericht.reacties = [];
-  bericht.save(function (err, rec) {
+  bericht.save(function (err, bericht) {
     if (err) return next(err);
-    res.json(rec);
+    res.json(bericht);
   });
 });
 
@@ -91,7 +91,7 @@ router.post("/API/bericht/:bericht/reacties", auth, function (req, res, next) {
   reactie.save(function (err, reactie) {
     if (err) return next(err);
     req.bericht.reacties.push(reactie);
-    req.bericht.save(function (err, rec) {
+    req.bericht.save(function (err, bericht) {
       if (err) return next(err);
       res.json(reactie);
     });
@@ -127,9 +127,9 @@ router.get("/API/categorieen", auth, function (req, res, next) {
 /* POST Categorie */
 router.post("/API/categorieen", auth, function (req, res, next) {
   let categorie = new Categorie({naam: req.body.naam, graad: req.body.graad});
-  categorie.save(function (err, rec) {
+  categorie.save(function (err, categorie) {
     if (err) return next(err);
-    res.json(rec);
+    res.json(categorie);
   });
 });
 
@@ -147,9 +147,9 @@ router.get("/API/regios", function (req, res, next) {
 /* POST Regio */
 router.post("/API/regios", auth, function (req, res, next) {
   let regio = new Regio({naam: req.body.naam});
-  regio.save(function (err, rec) {
+  regio.save(function (err, regio) {
     if (err) return next(err);
-    res.json(rec);
+    res.json(regio);
   });
 });
 

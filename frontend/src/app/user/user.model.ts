@@ -7,9 +7,9 @@ export class Regio {
   }
 
   static fromJSON(json: any): Regio {
-    const rec = new Regio(json.naam);
-    rec._id = json._id;
-    return rec;
+    const regio = new Regio(json.naam);
+    regio._id = json._id;
+    return regio;
   }
 
   get id(): string {
@@ -38,15 +38,15 @@ export class User {
   }
 
   static fromJSON(json: any): User {
-    const rec = new User(
+    const user = new User(
       json.username,
       json.voornaam,
       json.familienaam,
       json.email,
       json.regio
     );
-    rec._id = json._id;
-    return rec;
+    user._id = json._id;
+    return user;
   }
 
   get id(): string {

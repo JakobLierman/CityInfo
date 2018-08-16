@@ -13,13 +13,13 @@ export class Reactie {
   }
 
   static fromJSON(json: any): Reactie {
-    const rec = new Reactie(
+    const reactie = new Reactie(
       json.boodschap,
       json.user,
       json.created
     );
-    rec._id = json._id;
-    return rec;
+    reactie._id = json._id;
+    return reactie;
   }
 
   toJSON() {

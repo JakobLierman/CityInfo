@@ -12,9 +12,9 @@ export class Categorie {
   }
 
   static fromJSON(json: any): Categorie {
-    const rec = new Categorie(json.naam, json.graad);
-    rec._id = json._id;
-    return rec;
+    const categorie = new Categorie(json.naam, json.graad);
+    categorie._id = json._id;
+    return categorie;
   }
 
   get id(): number {
@@ -54,16 +54,16 @@ export class Bericht {
   }
 
   static fromJSON(json: any): Bericht {
-    const rec = new Bericht(
+    const bericht = new Bericht(
       json.titel,
       json.boodschap,
       json.categorie,
       json.user,
       json.created
     );
-    rec._id = json._id;
-    rec._reacties = json.reacties.map(Reactie.fromJSON);
-    return rec;
+    bericht._id = json._id;
+    bericht._reacties = json.reacties.map(Reactie.fromJSON);
+    return bericht;
   }
 
   toJSON() {
