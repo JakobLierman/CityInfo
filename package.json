@@ -1,4 +1,4 @@
- {
+{
   "name": "cityinfoapp",
   "version": "1.0.0",
   "description": "CityInfo app for Web4",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/JakobLierman/web4-20172018-2a2-gent-JakobLierman"
+    "url": "git://github.com/Web-IV/web4-20172018-2a2-gent-JakobLierman"
   },
   "engines": {
     "node": ">=6.0.0"
